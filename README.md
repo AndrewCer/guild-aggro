@@ -1,1 +1,2 @@
-# guild-aggro
+# Guild Aggro
+A guild hosting application
