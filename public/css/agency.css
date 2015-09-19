@@ -870,3 +870,41 @@ body {
 .color-red {
   color: red;
 }
+
+#pulsor {
+    width: 120px;
+    margin: 64px;
+    padding: 16px 32px;
+    font-size: 32px;
+    cursor: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #333;
+}
+
+#create-pulsor:link {
+    -webkit-animation: pusate 1s infinite alternate;
+    -moz-animation: pusate 1s infinite alternate;
+    -animation: pusate 1s infinite alternate;
+    text-shadow: white;
+}
+
+#create-pulsor:hover, #create-pulsor:active {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -animation: none;
+}
+
+@-webkit-keyframes pusate {
+  from { color: white; }
+  to { color: red; }
+}
+
+@-moz-keyframes pusate {
+  from { color: white; }
+  to { color: red; }
+}
+
+@keyframes pusate {
+  from { color: white; }
+  to { color: red; }
+}
