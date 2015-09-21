@@ -398,6 +398,10 @@ section h3.section-subheading {
     margin: 0;
 }
 
+.portfolio-link:hover {
+  text-decoration: none;
+}
+
 #portfolio .portfolio-item .portfolio-caption {
     margin: 0 auto;
     padding: 25px;
@@ -896,12 +900,12 @@ body {
   to { box-shadow: 0 0 30px #c00; }
 }
 
-/*@-moz-keyframes pulsate {
-  from { box-shadow: 0 0 10px #333; }
-  to { box-shadow: 0 0 20px #c00; }
+@-moz-keyframes pulsate {
+  from { box-shadow: 0 0 10px black; }
+  to { box-shadow: 0 0 30px #c00; }
 }
 
 @keyframes pulsate {
-  from { box-shadow: 0 0 10px #333; }
-  to { box-shadow: 0 0 20px #c00; }
-}*/
+  from { box-shadow: 0 0 10px black; }
+  to { box-shadow: 0 0 30px #c00; }
+}
