@@ -879,41 +879,29 @@ body {
   color: red;
 }
 
-
-#pulsor {
-    width: 120px;
-    margin: 64px;
-    padding: 16px 32px;
-    font-size: 32px;
-    cursor: auto;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #333;
-}
-
 #create-pulsor:link {
-    -webkit-animation: pusate 1s infinite alternate;
-    -moz-animation: pusate 1s infinite alternate;
-    -animation: pusate 1s infinite alternate;
-    text-shadow: white;
+    -webkit-animation: pulsate 2s infinite alternate;
+    -moz-animation: pulsate 2s infinite alternate;
+    -animation: pulsate 2s infinite alternate;
 }
 
-#create-pulsor:hover, #create-pulsor:active {
+#create-pulsor:hover {
   -webkit-animation: none;
   -moz-animation: none;
   -animation: none;
 }
 
-@-webkit-keyframes pusate {
-  from { color: white; }
-  to { color: red; }
+@-webkit-keyframes pulsate {
+  from { box-shadow: 0 0 10px black; }
+  to { box-shadow: 0 0 30px #c00; }
 }
 
-@-moz-keyframes pusate {
-  from { color: white; }
-  to { color: red; }
+/*@-moz-keyframes pulsate {
+  from { box-shadow: 0 0 10px #333; }
+  to { box-shadow: 0 0 20px #c00; }
 }
 
-@keyframes pusate {
-  from { color: white; }
-  to { color: red; }
-}
+@keyframes pulsate {
+  from { box-shadow: 0 0 10px #333; }
+  to { box-shadow: 0 0 20px #c00; }
+}*/
