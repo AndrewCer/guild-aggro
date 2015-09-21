@@ -717,6 +717,14 @@ section#contact .text-danger {
     color: #e74c3c;
 }
 
+.text-danger {
+  color: #e74c3c;
+}
+
+.text-danger li {
+  list-style-type: none;
+}
+
 footer {
     padding: 25px 0;
     text-align: center;
@@ -870,6 +878,7 @@ body {
 .color-red {
   color: red;
 }
+
 
 #pulsor {
     width: 120px;
