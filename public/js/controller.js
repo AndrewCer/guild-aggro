@@ -1,4 +1,4 @@
-app.controller('initSignUp', ['$scope', function ($scope) {
+app.controller('initSignUp', ['$scope', '$window', '$location', function ($scope, $window, $location) {
   $scope.initSignUpSubmit = function () {
     var validationArray = [$scope.guildName, $scope.realName, $scope.userHandle]
     var errorArray = []
@@ -12,6 +12,8 @@ app.controller('initSignUp', ['$scope', function ($scope) {
     // TODO: else: display errors
     if (errorArray.length === 0) {
       console.log('all clear');
+      // TODO: re route to another page????
+      // $location.path('/testing');
     }
     else {
       console.log('some error needs to be displayed to user');
