@@ -894,12 +894,23 @@ body {
   -moz-animation: none;
   -animation: none;
 }
-
+/* pulse animation */
+/*color: is broken in chrome...can only get box shadow to transition */
 @-webkit-keyframes pulsate {
+  from { color: white; }
+  to { color: red; }
+}
+
+@keyframes pulsate {
+  from { color: white; }
+  to { color: red; }
+}
+
+/* box shadow version */
+/*@-webkit-keyframes pulsate {
   from { box-shadow: 0 0 10px black; }
   to { box-shadow: 0 0 30px #c00; }
 }
-
 @-moz-keyframes pulsate {
   from { box-shadow: 0 0 10px black; }
   to { box-shadow: 0 0 30px #c00; }
@@ -908,4 +919,4 @@ body {
 @keyframes pulsate {
   from { box-shadow: 0 0 10px black; }
   to { box-shadow: 0 0 30px #c00; }
-}
+}*/

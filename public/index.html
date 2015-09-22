@@ -39,6 +39,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <base href="/">
 </head>
 <body id="page-top" class="index" ng-app='guildAggro'>
   <!-- Navigation -->
@@ -336,8 +337,8 @@
   <!-- Use the modals below to showcase details about your portfolio projects! -->
 
   <!-- Portfolio Modal 1 -->
-  <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true" ng-controller='initSignUp'>
-      <div class="modal-content">
+  <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-content" ng-controller='initSignUp'>
           <div class="close-modal" data-dismiss="modal">
               <div class="lr">
                   <div class="rl">
@@ -348,10 +349,8 @@
               <div class="row">
                   <div class="col-lg-8 col-lg-offset-2">
                       <div class="modal-body">
-                          <!-- Details and form here -->
                           <h2>Create Page</h2>
                           <p class="item-intro text-muted">Almost there! Just need some info.</p>
-                          <!-- Contact Section -->
                           <div class="container">
                               <div class="row">
                                   <div class="col-lg-12">
@@ -378,7 +377,6 @@
                                               <div class="clearfix"></div>
                                               <div class="col-md-2 text-center">
                                                   <div id="success"></div>
-                                                  <!-- check for guild name in db and then redirect if none found -->
                                                   <button type="submit" class="btn btn-xl">Create Guild</button>
                                               </div>
                                           </div>

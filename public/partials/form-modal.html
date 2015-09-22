@@ -1,0 +1,52 @@
+<div class="modal-content" ng-controller='initSignUp'>
+    <div class="close-modal" data-dismiss="modal">
+        <div class="lr">
+            <div class="rl">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="modal-body">
+                    <h2>Create Page</h2>
+                    <p class="item-intro text-muted">Almost there! Just need some info.</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form name="sentMessage" id="contactForm" ng-submit='initSignUpSubmit()' novalidate>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                          <div class="form-group">
+                                              <input type="tel" class="form-control" placeholder="Guild Name *" id="g-name" ng-model='guildName' required data-validation-required-message="Please enter your guild name.">
+                                              <p class="help-block text-danger"></p>
+                                          </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Your Name *" id="name" ng-model='realName' required data-validation-required-message="Please enter your name.">
+                                                <p class="help-block text-danger">{{nameError}}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="Your Email *" id="email" ng-model='email' required data-validation-required-message="Please enter your email address.">
+                                                <p class="help-block text-danger"></p>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="User Name (others will see this) *" ng-model='userHandle' id="user-name" required data-validation-required-message="Please enter your user name.">
+                                                <p class="help-block text-danger">{{handleError}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-2 text-center">
+                                            <div id="success"></div>
+                                            <button type="submit" class="btn btn-xl">Create Guild</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
