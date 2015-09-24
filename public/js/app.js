@@ -2,9 +2,9 @@ var app = angular.module('guildAggro', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
   $routeProvider
-    .when('/testing', {
+    .when('/', {
       templateUrl: 'partials/splash.html',
-      controller: 'splashController'
+      controller: 'SplashController'
     })
     $locationProvider.html5Mode(true);
 }])
