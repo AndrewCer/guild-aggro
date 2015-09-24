@@ -6,5 +6,9 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       templateUrl: 'partials/splash.html',
       controller: 'SplashController'
     })
+    .when('/signup', {
+      templateUrl: 'partials/signup.html',
+      controller: 'InitSignUpController'
+    })
     $locationProvider.html5Mode(true);
 }])

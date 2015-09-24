@@ -1,8 +1,16 @@
+app.controller('MasterController', ['$scope', '$location', '$anchorScroll', function ($scope, $location, $anchorScroll) {
+  $scope.closeModal = function () {
+    $location.path('/');
+    $location.hash('portfolio');
+    $anchorScroll();
+  }
+}])
+
 app.controller('SplashController', ['$scope', function ($scope) {
 
 }])
 
-app.controller('initSignUp', ['$scope', '$window', '$location', function ($scope, $window, $location) {
+app.controller('InitSignUpController', ['$scope', '$window', '$location', function ($scope, $window, $location) {
   $scope.initSignUpSubmit = function () {
     var validationArray = [$scope.guildName, $scope.realName, $scope.userHandle]
     var errorArray = []

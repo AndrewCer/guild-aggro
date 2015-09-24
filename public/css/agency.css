@@ -906,6 +906,32 @@ body {
   to { color: red; }
 }
 
+#close-signup {
+  font-size: 4em;
+  margin: 10px;
+}
+
+#close-signup:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.default-color {
+  color: #333;
+}
+
+.cancel {
+  margin-top: 10px;
+}
+
+.testing {
+  text-align: center;
+}
+
+.top-margin {
+  margin-top: 10%;
+}
+
 /* box shadow version */
 /*@-webkit-keyframes pulsate {
   from { box-shadow: 0 0 10px black; }
