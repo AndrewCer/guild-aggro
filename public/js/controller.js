@@ -66,10 +66,15 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
     var password = $scope.password;
     var passwordConfirm = $scope.passwordConfirm;
     //make call to server, do same checks as above. If pass, load new partial, else display errors
-    $http.post('api/authenticate', {userName: userName, email: email, emailConfirm: emailConfirm, password: password, passwordConfirm: passwordConfirm})
-    .then(function (response) {
-      return 'output depends on pass or failure return'
-    })
+    if ($scope.allPass) {
+      $http.post('api/authenticate', {userName: userName, email: email, emailConfirm: emailConfirm, password: password, passwordConfirm: passwordConfirm})
+      .then(function (response) {
+        return 'if all passes set cookie w/ id and redirect'
+      })
+    }
+    else {
+      // TODO: display error to user that info needs to be filled in
+    }
   }
   //use to clear form info (or anything else for that matter)
   $scope.clearForm = function () {
