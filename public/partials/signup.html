@@ -1,49 +1,52 @@
 <!-- Guild Creation Modal -->
     <div ng-controller='InitSignUpController'>
-      <a class="default-color" ng-click='closeModal()'><i id="close-signup" class="fa fa-times pull-right"></i></a>
+      <a id="close-signup" class="default-color" ng-click='closeModal()'><i class="fa fa-times pull-right"></i></a>
       <div class="container">
           <div class="row">
               <div class="col-lg-8 col-lg-offset-2">
                   <div>
-                    <div class="container col-md-offset-4 top-margin">
-                      <h2>Create Page</h2>
-                      <p class="item-intro text-muted">Basic information to get you started</p>
-                      <p class="item-intro text-muted">Almost there! Just need some info.</p>
+                    <div class="container col-md-12 top-margin">
+                      <h2 class="text-center">Create Guild Aggro Account</h2>
+                      <p class="item-intro text-muted text-center">Almost there! Just need some info.</p>
                     </div>
                       <div class="container">
                           <div class="row">
                               <div class="col-lg-12">
-                                  <form ng-submit='initSignUpSubmit()' novalidate>
+                                  <form ng-submit='accountCreation()' novalidate>
                                       <div class="row">
                                           <div class="col-md-8">
                                             <div class="form-group">
-                                                <input type="tel" class="form-control" placeholder="Guild Name *" id="g-name" ng-model='guildName' required data-validation-required-message="Please enter your guild name.">
-                                                <p class="help-block text-danger"></p>
+                                                <input autofocus ng-change='instaValidation(userHandle, "User name")' type="text" class="form-control" placeholder="User Name (others will see this) *" id="user-name" ng-model='userHandle'>
+                                                <p ng-repeat='error in handleError' class="help-block text-danger">{{error}}</p>
                                             </div>
-                                              <div class="form-group">
-                                                  <input type="text" class="form-control" placeholder="Your Name *" id="name" ng-model='realName' required data-validation-required-message="Please enter your name.">
-                                                  <p class="help-block text-danger">{{nameError}}</p>
-                                              </div>
-                                              <div class="form-group">
-                                                  <input type="email" class="form-control" placeholder="Your Email *" id="email" ng-model='email' required data-validation-required-message="Please enter your email address.">
-                                                  <p class="help-block text-danger"></p>
-                                              </div>
-                                              <div class="form-group">
-                                                  <input type="text" class="form-control" placeholder="User Name (others will see this) *" ng-model='userHandle' id="user-name" required data-validation-required-message="Please enter your user name.">
-                                                  <p class="help-block text-danger">{{handleError}}</p>
-                                              </div>
+                                            <div class="form-group">
+                                                <input ng-change='instaValidation(email, "Email")' type="text" class="form-control" placeholder="Your Email *" id="email" ng-model='email'>
+                                                <p ng-repeat='error in emailError' class="help-block text-danger">{{error}}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <input ng-change='samenessCheck(email, emailConfirm, "email")' type="text" class="form-control" placeholder="Confirm Email *" id="email-confirm" ng-model='emailConfirm'>
+                                                <p class="help-block text-danger">{{emailConfirmError}}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" ng-change='instaValidation(password, "Password")' class="form-control" placeholder="Your Password *" id="password" ng-model='password'>
+                                                <p ng-repeat='error in passwordError' class="help-block text-danger">{{error}}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <input ng-change='samenessCheck(password, passwordConfirm, "password")' type="password" class="form-control" placeholder="Confirm Password *" ng-model='passwordConfirm' id="password-confirm">
+                                                <p class="help-block text-danger">{{passwordConfirmError}}</p>
+                                            </div>
                                           </div>
                                           <div class="clearfix"></div>
-                                          <div class="col-md-2 text-center">
-                                              <button type="submit" class="btn btn-xl">Create Guild</button>
-                                          </div>
+                                        <div class="col-md-8 text-center">
+                                            <button type="submit" class="btn btn-xl">Create Account</button>
+                                        </div>
+                                        <div class="col-md-8 text-center">
+                                          <button type="button" class="btn btn-primary cancel" data-dismiss="modal" ng-click='closeModal()'><i class="fa fa-times"></i> Cancel</button>
+                                        </div>
                                       </div>
                                   </form>
                               </div>
                           </div>
-                      </div>
-                      <div class="col-md-2 text-center">
-                        <button type="button" class="btn btn-primary cancel" data-dismiss="modal" ng-click='closeModal()'><i class="fa fa-times"></i> Cancel</button>
                       </div>
                   </div>
               </div>

@@ -11,27 +11,49 @@ app.controller('SplashController', ['$scope', function ($scope) {
 }])
 
 app.controller('InitSignUpController', ['$scope', '$window', '$location', function ($scope, $window, $location) {
-  $scope.initSignUpSubmit = function () {
-    var validationArray = [$scope.guildName, $scope.realName, $scope.userHandle]
-    var errorArray = []
-    for (var i = 0; i < validationArray.length; i++) {
-      var outcome = authentication(validationArray[i], i)
-      if (Object.keys(outcome).length != 0) {
-        errorArray.push(outcome)
+  $scope.instaValidation = function (input, spot) {
+    if (authentication(input, spot).length != 0) {
+      if (spot === 'User name') {
+        $scope.handleError = authentication(input, spot);
+      }
+      if (spot === 'Password') {
+        $scope.passwordError = authentication(input, spot);
+      }
+      if (spot === 'Email') {
+        $scope.emailError = authentication(input, spot);
       }
     }
-    //if there are no input errors, continue, else below
-    // TODO: else: display errors
-    if (errorArray.length === 0) {
-      console.log('all clear');
-      // TODO: re route to another page????
-      // $window.location.href = '/testing';
+    else {
+      $scope.handleError = null;
+      $scope.passwordError = null;
+      $scope.emailError = null;
+    }
+  }
+  $scope.samenessCheck = function (original, newInput, type) {
+    if (original != newInput) {
+      if (type === "email") {
+        $scope.emailConfirmError = 'Email address does not match';
+      }
+      if (type === 'password') {
+        $scope.passwordConfirmError = 'Password does not match';
+      }
     }
     else {
-      //display errors here
-      console.log(errorArray);
-      // $scope.guildError = errorArray[]
-      console.log('some error needs to be displayed to user');
+      $scope.emailConfirmError = null;
+      $scope.passwordConfirmError = null;
+    }
+  }
+  $scope.accountCreation = function () {
+    var userName = $scope.userHandle;
+    var email = $scope.email;
+    var emailConfirm = $scope.emailConfirm;
+    var password = $scope.password;
+    var passwordConfirm = $scope.passwordConfirm;
+    if(authentication(userName, "User name").length != 0) {
+      $scope.handleError = authentication(userName, 'User name');
+    }
+    else {
+      $scope.handleError = null;
     }
   }
   //use to clear form info (or anything else for that matter)

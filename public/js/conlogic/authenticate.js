@@ -1,25 +1,39 @@
-var authentication = function (testCase, index) {
+var authentication = function (testCase, text) {
   var illegals = /\W/;
-  var errorObj = {};
-  if (testCase.length < 5) {
-    errorObj.position = index;
-    errorObj.tooShort = 'must be longer than 4 characters';
+  var errorArray = [];
+  if (text === 'User name') {
+    if (testCase.length < 5 && testCase != 0) {
+      errorArray.push(text + ' must be longer than 4 characters');
+    }
+    if (testCase.length > 15) {
+      errorArray.push(text + ' must be less than 15 characters');
+    }
+    if (illegals.test(testCase)) {
+      errorArray.push(text + ' contains illegal characters. Can only use letters, numbers and underscores (no spaces)');
+    }
   }
-  if (testCase.length > 15) {
-    errorObj.position = index;
-    errorObj.tooLong = 'must be less than 15 characters';
+  if (testCase === undefined || !testCase.replace(/\s/g, '').length) {
+    errorArray.push(text + ' can not be blank');
   }
-  if (illegals.test(testCase)) {
-    errorObj.position = index;
-    errorObj.illegals = 'contains illegal characters. Can only use letters, numbers and underscores (no spaces)';
+  if (text === 'Password') {
+    if (testCase.length < 6 && testCase != 0) {
+      errorArray.push(text + ' must be greater than 5 characters');
+    }
+    if (testCase.length >= 31) {
+      errorArray.push(text + ' may not be more than 30 characters');
+    }
   }
-  // if (password.length < 6) {
-  //   $scope.passwordError = 'Password is too short. Must be greater than 5 characters';
-  //   errorArray.push(true);
-  // }
+  if (text === 'Email') {
+    var filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    if (filter.test(testCase)) {
+    }
+    else {
+      errorArray.push("Please input a valid email address")
+    }
+  }
   // if (password != passwordCheck) {
   //   $scope.passwordMatchError = 'Passwords do not match';
   //   errorArray.push(true);
   // }
-  return errorObj;
+  return errorArray;
 }

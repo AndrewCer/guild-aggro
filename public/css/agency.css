@@ -911,6 +911,10 @@ body {
   margin: 10px;
 }
 
+#close-signup i {
+  margin: 20px;
+}
+
 #close-signup:hover {
   color: red;
   cursor: pointer;
@@ -930,6 +934,11 @@ body {
 
 .top-margin {
   margin-top: 10%;
+}
+
+.form-error {
+  background-color: #9c2b2e;
+  border: solid red 3px;
 }
 
 /* box shadow version */
