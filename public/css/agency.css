@@ -941,6 +941,12 @@ body {
   border: solid red 3px;
 }
 
+.grayed-out {
+  background-color: gray;
+  border-color: gray;
+  color: black;
+}
+
 /* box shadow version */
 /*@-webkit-keyframes pulsate {
   from { box-shadow: 0 0 10px black; }
