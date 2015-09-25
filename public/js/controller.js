@@ -164,6 +164,7 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
           //passed and inserted user into db
           //pass data from db to a factory
           UserStore.userInfo(response.data);
+          // TODO: figure out how to access this factory
           //redirect and access user info from another controller/partial
           $location.path('/guild-creation')
         }
@@ -176,5 +177,7 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
 }])
 
 app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', 'UserStore', function ($scope, $window, $location, $http, UserStore) {
-
+  // var testing = UserStore.user
+  // console.log(testing);
+  // TODO: figure out how to access the factory for user info via UserStore.something
 }])
