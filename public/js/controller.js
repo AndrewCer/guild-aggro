@@ -63,6 +63,7 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
   $scope.samenessCheck = function (original, newInput, type) {
     if (original != newInput) {
       if (type === "email") {
+        console.log(original, newInput);
         $scope.emailConfirmError = 'Email address does not match';
         $scope.allPass = false;
         $scope.emailNonMatch = true;
@@ -76,7 +77,7 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
     }
     else {
       if (type === 'email') {
-        // $scope.emailConfirmError = null;
+        $scope.emailConfirmError = null;
         if ($scope.emailAvailable == true) {
           $scope.allPass = true;
           $scope.emailPass = true;
@@ -102,7 +103,10 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
   $scope.checkDb = function (input) {
     if (input === 'name') {
       if ($scope.handleError === null) {
-        checkAvailability($scope.userHandle)
+        var toCheckObj = {};
+        toCheckObj.input = $scope.userHandle;
+        toCheckObj.spot = input;
+        checkAvailability(toCheckObj)
         .then(function (value) {
           if (value.data === true) {
           $scope.allPass = false;
@@ -119,7 +123,10 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
     }
     if (input === 'email') {
       if ($scope.emailError === null) {
-        checkAvailability($scope.email)
+        var toCheckObj = {};
+        toCheckObj.input = $scope.email;
+        toCheckObj.spot = input;
+        checkAvailability(toCheckObj)
         .then(function (value) {
           if (value.data === true) {
             $scope.allPass = false;
@@ -146,21 +153,19 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
     if ($scope.allPass) {
       $http.post('api/auth', {userName: userName, email: email, emailConfirm: emailConfirm, password: password, passwordConfirm: passwordConfirm})
       .then(function (response) {
-        if (response.data) {
+        if (response.data.handleErrors || response.data.passwordErrors || response.data.emailArray) {
+          //something went wrong or already exists in db
           $scope.allPass = false;
           $scope.handleError = response.data.handleErrors
           $scope.passwordError = response.data.passwordErrors
           $scope.emailError = response.data.emailArray
-          //something went wrong
           console.log(response.data);
         }
         else {
+          //passed and inserted user into db
           console.log('passed');
         }
       })
-    }
-    else {
-      // TODO: display error to user that info needs to be filled in
     }
   }
   //use to clear form info (or anything else for that matter)
