@@ -144,6 +144,7 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
     if ($scope.allPass) {
       $http.post('api/authenticate', {userName: userName, email: email, emailConfirm: emailConfirm, password: password, passwordConfirm: passwordConfirm})
       .then(function (response) {
+        console.log(response);
         return 'if all passes set cookie w/ id and redirect'
       })
     }

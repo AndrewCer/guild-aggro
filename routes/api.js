@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-// var unirest = require('unirest');
-// var db = require('monk')(process.env.MONGOLAB_URI);
-// var users = db.get('users');
+var db = require('monk')(process.env.MONGOLAB_URI);
+var users = db.get('users');
 var validateSignUp = require('../lib/validations.js');
 // var bcrypt = require('bcrypt');
 
