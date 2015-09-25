@@ -10,7 +10,7 @@ app.controller('SplashController', ['$scope', function ($scope) {
 
 }])
 
-app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', function ($scope, $window, $location, $http) {
+app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', 'UserStore', function ($scope, $window, $location, $http, UserStore) {
   var checkAvailability = function (type) {
     return $http.post('api/check-db', {toCheck: type})
     .then(function (response) {
@@ -63,7 +63,6 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
   $scope.samenessCheck = function (original, newInput, type) {
     if (original != newInput) {
       if (type === "email") {
-        console.log(original, newInput);
         $scope.emailConfirmError = 'Email address does not match';
         $scope.allPass = false;
         $scope.emailNonMatch = true;
@@ -163,7 +162,10 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
         }
         else {
           //passed and inserted user into db
-          console.log('passed');
+          //pass data from db to a factory
+          UserStore.userInfo(response.data);
+          //redirect and access user info from another controller/partial
+          $location.path('/guild-creation')
         }
       })
     }
@@ -171,4 +173,8 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
   //use to clear form info (or anything else for that matter)
   $scope.clearForm = function () {
   }
+}])
+
+app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', 'UserStore', function ($scope, $window, $location, $http, UserStore) {
+
 }])

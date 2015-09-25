@@ -67,14 +67,15 @@ router.post('/auth', function (req, res) {
           res.json(returnObj);
         }
         else {
-        //nothing went wrong
-        //if none are found insert into db (bcrypt that shiz)
+        //nothing went wrong insert away
         bcrypt.hash(password, 8, function(err, hash) {
           users.insert({ username: userName, email: email, password: hash })
           .then(function (user) {
-            // res.json(user._id);
-            console.log(user);
-            res.json(true)
+            //return user id for later queries and cookies
+            var userObj = {}
+            userObj.ident = user._id;
+            userObj.name = user.username;
+            res.json(userObj);
           })
         });
         }

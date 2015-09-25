@@ -10,5 +10,9 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       templateUrl: 'partials/signup.html',
       controller: 'InitSignUpController'
     })
+    .when('/guild-creation', {
+      templateUrl: 'partials/guild-creation.html',
+      controller: 'GuildCreationController'
+    })
     $locationProvider.html5Mode(true);
 }])
