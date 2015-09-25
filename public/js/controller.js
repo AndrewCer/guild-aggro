@@ -78,12 +78,14 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
       if (type === 'email') {
         // $scope.emailConfirmError = null;
         if ($scope.emailAvailable == true) {
+          $scope.allPass = true;
           $scope.emailPass = true;
           $scope.emailConfirmError = null;
         }
       }
       if (type === 'password') {
         if ($scope.passwordError === null ) {
+          $scope.allPass = true;
           $scope.passConfirmError = false;
           $scope.passConfirmPassed = true;
           $scope.passwordConfirmError = null;
@@ -142,10 +144,19 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
     var passwordConfirm = $scope.passwordConfirm;
     //make call to server, do same checks as above. If pass, load new partial, else display errors
     if ($scope.allPass) {
-      $http.post('api/authenticate', {userName: userName, email: email, emailConfirm: emailConfirm, password: password, passwordConfirm: passwordConfirm})
+      $http.post('api/auth', {userName: userName, email: email, emailConfirm: emailConfirm, password: password, passwordConfirm: passwordConfirm})
       .then(function (response) {
-        console.log(response);
-        return 'if all passes set cookie w/ id and redirect'
+        if (response.data) {
+          $scope.allPass = false;
+          $scope.handleError = response.data.handleErrors
+          $scope.passwordError = response.data.passwordErrors
+          $scope.emailError = response.data.emailArray
+          //something went wrong
+          console.log(response.data);
+        }
+        else {
+          console.log('passed');
+        }
       })
     }
     else {
