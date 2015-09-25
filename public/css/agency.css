@@ -936,19 +936,29 @@ body {
   margin-top: 10%;
 }
 
-.form-error {
-  background-color: #9c2b2e;
-  border: solid red 3px;
-}
-
 .grayed-out {
   background-color: gray;
   border-color: gray;
   color: black;
 }
 
-#check-mark {
-  font-size: 1.5em;
+.check-mark {
+  color: green;
+}
+
+.x-mark {
+  color: red;
+}
+
+.fill-red {
+  background-color: #ebd4d5;
+  border: solid red 1px;
+  color: red;
+}
+
+.fill-green {
+  background-color: #BCED91;
+  border: solid green 1px;
   color: green;
 }
 

@@ -18,8 +18,8 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
     })
   }
   $scope.instaValidation = function (input, spot) {
-    // TODO: if error, change class to highlight background red via the class .form-error
-    // console.log(this);
+    $scope.nameUnAvailable = false;
+    $scope.nameAvailable = false;
     if (authentication(input, spot).length != 0) {
       if (spot === 'User name') {
         $scope.handleError = authentication(input, spot);
@@ -73,10 +73,12 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
         if (value.data === true) {
         // TODO: username is taken
         // setup ng-hide to respon to this and show a red x when the name is taken
+        $scope.nameUnAvailable = true;
         $scope.nameAvailable = false;
         }
         else {
         // TODO: say username is not taken maybe use font awesome green checkmark
+          $scope.nameUnAvailable = false;
           $scope.nameAvailable = true;
         }
       });
