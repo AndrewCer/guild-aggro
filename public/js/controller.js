@@ -18,16 +18,26 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
     })
   }
   $scope.instaValidation = function (input, spot) {
-    $scope.nameUnAvailable = false;
-    $scope.nameAvailable = false;
+    // $scope.nameUnAvailable = false;
+    // $scope.nameAvailable = false;
+    // $scope.emailUnAvailable = false;
+    // $scope.emailAvailable = false;
     if (authentication(input, spot).length != 0) {
       if (spot === 'User name') {
+        $scope.allPass = false;
         $scope.handleError = authentication(input, spot);
       }
       if (spot === 'Password') {
+        $scope.allPass = false;
+        $scope.passwordPassed = false;
+        $scope.passwordFillError = true;
+        $scope.passLength = false;
+        $scope.passConfirmError = true;
+        $scope.passConfirmPassed = null;
         $scope.passwordError = authentication(input, spot);
       }
       if (spot === 'Email') {
+        $scope.allPass = false;
         $scope.emailError = authentication(input, spot);
       }
     }
@@ -36,28 +46,12 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
         $scope.handleError = null;
       }
       if (spot === 'Password') {
+        $scope.passLength = true;
+        $scope.passwordPassed = true;
         $scope.passwordError = null;
       }
       if (spot === 'Email') {
         $scope.emailError = null;
-      }
-    }
-  }
-  $scope.samenessCheck = function (original, newInput, type) {
-    if (original != newInput) {
-      if (type === "email") {
-        $scope.emailConfirmError = 'Email address does not match';
-      }
-      if (type === 'password') {
-        $scope.passwordConfirmError = 'Password does not match';
-      }
-    }
-    else {
-      if (type === 'email') {
-        $scope.emailConfirmError = null;
-      }
-      if (type === 'password') {
-        $scope.passwordConfirmError = null;
       }
     }
     if ($scope.handleError === null && $scope.passwordError === null && $scope.emailError === null && $scope.emailConfirmError === null && $scope.passwordConfirmError === null) {
@@ -66,22 +60,78 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
       $scope.allPass = true;
     }
   }
-  $scope.checkDb = function () {
-    if ($scope.handleError === null) {
-      checkAvailability($scope.userHandle)
-      .then(function (value) {
-        if (value.data === true) {
-        // TODO: username is taken
-        // setup ng-hide to respon to this and show a red x when the name is taken
-        $scope.nameUnAvailable = true;
-        $scope.nameAvailable = false;
+  $scope.samenessCheck = function (original, newInput, type) {
+    if (original != newInput) {
+      if (type === "email") {
+        $scope.emailConfirmError = 'Email address does not match';
+        $scope.allPass = false;
+        $scope.emailNonMatch = true;
+      }
+      if (type === 'password') {
+        $scope.passConfirmError = true;
+        $scope.passConfirmPassed = false;
+        $scope.allPass = false;
+        $scope.passwordConfirmError = 'Password does not match';
+      }
+    }
+    else {
+      if (type === 'email') {
+        // $scope.emailConfirmError = null;
+        if ($scope.emailAvailable == true) {
+          $scope.emailPass = true;
+          $scope.emailConfirmError = null;
         }
-        else {
-        // TODO: say username is not taken maybe use font awesome green checkmark
-          $scope.nameUnAvailable = false;
-          $scope.nameAvailable = true;
+      }
+      if (type === 'password') {
+        if ($scope.passwordError === null ) {
+          $scope.passConfirmError = false;
+          $scope.passConfirmPassed = true;
+          $scope.passwordConfirmError = null;
         }
-      });
+        // $scope.passwordConfirmError = null;
+      }
+    }
+    if ($scope.handleError === null && $scope.passwordError === null && $scope.emailError === null && $scope.emailConfirmError === null && $scope.passwordConfirmError === null) {
+      // TODO: set ng animate to brightly color the button when this all passes
+      // TODO: also maybe do a db call to check if any of these names exists, if they do tell user
+      $scope.allPass = true;
+    }
+  }
+  $scope.checkDb = function (input) {
+    if (input === 'name') {
+      if ($scope.handleError === null) {
+        checkAvailability($scope.userHandle)
+        .then(function (value) {
+          if (value.data === true) {
+          $scope.allPass = false;
+          $scope.nameUnAvailable = true;
+          $scope.nameAvailable = false;
+          }
+          else {
+            $scope.allPass = false;
+            $scope.nameUnAvailable = false;
+            $scope.nameAvailable = true;
+          }
+        });
+      }
+    }
+    if (input === 'email') {
+      if ($scope.emailError === null) {
+        checkAvailability($scope.email)
+        .then(function (value) {
+          if (value.data === true) {
+            $scope.allPass = false;
+            $scope.emailUnAvailable = true;
+            $scope.emailAvailable = false;
+            $scope.emailPass = false;
+          }
+          else {
+            $scope.allPass = false;
+            $scope.emailUnAvailable = false;
+            $scope.emailAvailable = true;
+          }
+        })
+      }
     }
   }
   $scope.accountCreation = function () {

@@ -32,7 +32,8 @@ router.post('/check-db', function (req, res) {
   //static username to simulate db
   var toCheck = req.body.toCheck
   var username = 'andrew';
-  if (username === toCheck) {
+  var email = 'cer.andrew@gmail.com';
+  if (username === toCheck || email === toCheck) {
     res.json(true);
   }
   else {

@@ -954,12 +954,16 @@ body {
   background-color: #ebd4d5;
   border: solid red 1px;
   color: red;
+  -webkit-box-shadow: 0 0 0px 1000px #ebd4d5 inset;
+  -webkit-text-fill-color: red !important;
 }
 
 .fill-green {
   background-color: #BCED91;
   border: solid green 1px;
   color: green;
+  -webkit-box-shadow: 0 0 0px 1000px #BCED91 inset;
+  -webkit-text-fill-color: green !important;
 }
 
 /* box shadow version */
