@@ -1,8 +1,8 @@
 app.factory('UserStore', function () {
   var obj = {};
-  var userInformation;
+  var userInformation = [];
   obj.userInfo = function (inputObj) {
-    userInformation = inputObj;
+    userInformation.push(inputObj);
     return userInformation;
   }
   obj.user = userInformation;

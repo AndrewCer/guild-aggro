@@ -1,3 +1,9 @@
+String.prototype.capitalize = function(){
+    return this.toLowerCase().replace( /\b\w/g, function (m) {
+        return m.toUpperCase();
+    });
+};
+
 app.controller('MasterController', ['$scope', '$location', '$anchorScroll', function ($scope, $location, $anchorScroll) {
   $scope.closeModal = function () {
     $location.path('/');
@@ -6,8 +12,13 @@ app.controller('MasterController', ['$scope', '$location', '$anchorScroll', func
   }
 }])
 
-app.controller('SplashController', ['$scope', function ($scope) {
-
+app.controller('SplashController', ['$scope', '$timeout', function ($scope, $timeout) {
+  // NOTE: testing here
+  $scope.showLogin = true;
+  $scope.fadeOut = function() {
+    $scope.showLogin = false;
+  };
+  // NOTE: testing here
 }])
 
 app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', 'UserStore', function ($scope, $window, $location, $http, UserStore) {
@@ -176,8 +187,12 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
   }
 }])
 
-app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', 'UserStore', function ($scope, $window, $location, $http, UserStore) {
-  // var testing = UserStore.user
-  // console.log(testing);
-  // TODO: figure out how to access the factory for user info via UserStore.something
+app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', '$timeout', 'UserStore', function ($scope, $window, $location, $http, $timeout, UserStore) {
+  // NOTE: get user id
+  console.log(UserStore.user[0].ident);
+  // NOTE: get user name
+  console.log(UserStore.user[0].name);
+  $scope.userName = UserStore.user[0].name.capitalize();
+
+
 }])

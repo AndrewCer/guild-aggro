@@ -966,6 +966,50 @@ body {
   -webkit-text-fill-color: green !important;
 }
 
+.login-fade-bar {
+  margin-top: 20px;
+  color: green;
+  background-color: #BCED91;
+  border: solid green 1px;
+  text-align: center;
+  padding: 20px;
+}
+
+#fade-bar-x {
+  font-size: 1.3em;
+}
+
+#fade-bar-x:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.animate-enter,
+.animate-leave
+{
+  -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  position: relative;
+  display: block;
+}
+
+/*.animate-enter.animate-enter-active,
+.animate-leave {
+  opacity: 1;
+  top: 0;
+  height: 30px;
+}
+
+.animate-leave.animate-leave-active,
+.animate-enter {
+  opacity: 0;
+  top: -50px;
+  height: 0px;
+}*/
+
 /* box shadow version */
 /*@-webkit-keyframes pulsate {
   from { box-shadow: 0 0 10px black; }
