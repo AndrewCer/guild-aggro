@@ -11,6 +11,12 @@ app.controller('SplashController', ['$scope', function ($scope) {
 }])
 
 app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', function ($scope, $window, $location, $http) {
+  var checkAvailability = function (type) {
+    return $http.post('api/check-db', {toCheck: type})
+    .then(function (response) {
+      return response
+    })
+  }
   $scope.instaValidation = function (input, spot) {
     // TODO: if error, change class to highlight background red via the class .form-error
     // console.log(this);
@@ -58,6 +64,22 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
       // TODO: set ng animate to brightly color the button when this all passes
       // TODO: also maybe do a db call to check if any of these names exists, if they do tell user
       $scope.allPass = true;
+    }
+  }
+  $scope.checkDb = function () {
+    if ($scope.handleError === null) {
+      checkAvailability($scope.userHandle)
+      .then(function (value) {
+        if (value.data === true) {
+        // TODO: username is taken
+        // setup ng-hide to respon to this and show a red x when the name is taken
+        $scope.nameAvailable = false;
+        }
+        else {
+        // TODO: say username is not taken maybe use font awesome green checkmark
+          $scope.nameAvailable = true;
+        }
+      });
     }
   }
   $scope.accountCreation = function () {

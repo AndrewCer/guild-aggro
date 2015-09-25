@@ -31,9 +31,5 @@ var authentication = function (testCase, text) {
       errorArray.push("Please input a valid email address")
     }
   }
-  // if (password != passwordCheck) {
-  //   $scope.passwordMatchError = 'Passwords do not match';
-  //   errorArray.push(true);
-  // }
   return errorArray;
 }

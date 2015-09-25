@@ -6,7 +6,7 @@ var router = express.Router();
 var validateSignUp = require('../lib/validations.js');
 // var bcrypt = require('bcrypt');
 
-router.post('/authenticate', function(req, res, next) {
+router.post('/authenticate', function(req, res) {
   var userName = req.body.username;
   var email = req.body.email;
   var emailConfirm = req.body.emailConfirm;
@@ -26,6 +26,19 @@ router.post('/authenticate', function(req, res, next) {
     //check db for already occuring names and if none exists insert and redirect otherwise tell user
   }
 });
+
+router.post('/check-db', function (req, res) {
+  // TODO: check db for the incoming field to see if its taken (username, email, or guild name)
+  //static username to simulate db
+  var toCheck = req.body.toCheck
+  var username = 'andrew';
+  if (username === toCheck) {
+    res.json(true);
+  }
+  else {
+    res.json(false);
+  }
+})
 
 
 module.exports = router;

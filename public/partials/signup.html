@@ -6,7 +6,7 @@
               <div class="col-lg-8 col-lg-offset-2">
                   <div>
                     <div class="container col-md-12 top-margin">
-                      <h2 class="text-center">Create Guild Aggro Account</h2>
+                      <h2 class="text-center">Create Guild <span class="color-red">Aggro</span> Account</h2>
                       <p class="item-intro text-muted text-center">Almost there! Just need some info.</p>
                     </div>
                       <div class="container">
@@ -16,7 +16,8 @@
                                       <div class="row">
                                           <div class="col-md-8">
                                             <div class="form-group">
-                                                <input autofocus ng-change='instaValidation(userHandle, "User name")' type="text" class="form-control" placeholder="User Name (others will see this) *" id="user-name" ng-model='userHandle'>
+                                                <i class="fa fa-check-circle-o" id="check-mark" ng-show='nameAvailable'> Name Available</i>
+                                                <input autofocus ng-blur='checkDb()' ng-change='instaValidation(userHandle, "User name")' type="text" class="form-control" placeholder="User Name (others will see this) *" id="user-name" ng-model='userHandle'>
                                                 <p ng-repeat='error in handleError' class="help-block text-danger">{{error}}</p>
                                             </div>
                                             <div class="form-group">
