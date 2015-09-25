@@ -8,7 +8,7 @@ var bcrypt = require('bcrypt');
 
 router.post('/check-db', function (req, res) {
   // TODO: can also use this to check if guilds are available!
-  var toCheck = req.body.toCheck.input;
+  var toCheck = req.body.toCheck.input.toLowerCase();
   var spot = req.body.toCheck.spot;
   if (spot === 'name') {
     users.findOne({username: toCheck})
@@ -35,9 +35,9 @@ router.post('/check-db', function (req, res) {
 })
 
 router.post('/auth', function (req, res) {
-  var userName = req.body.userName;
-  var email = req.body.email;
-  var emailConfirm = req.body.emailConfirm;
+  var userName = req.body.userName.toLowerCase();
+  var email = req.body.email.toLowerCase();
+  var emailConfirm = req.body.emailConfirm.toLowerCase();
   var password = req.body.password;
   var passConfirm = req.body.passwordConfirm;
   //to simulate hack from client side
@@ -70,7 +70,7 @@ router.post('/auth', function (req, res) {
         //nothing went wrong
         //if none are found insert into db (bcrypt that shiz)
         bcrypt.hash(password, 8, function(err, hash) {
-          users.insert({ username: userName.toLowerCase(), email: email.toLowerCase(), password: hash })
+          users.insert({ username: userName, email: email, password: hash })
           .then(function (user) {
             // res.json(user._id);
             console.log(user);
