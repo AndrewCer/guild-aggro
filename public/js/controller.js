@@ -14,10 +14,10 @@ app.controller('MasterController', ['$scope', '$location', '$anchorScroll', func
 
 app.controller('SplashController', ['$scope', '$timeout', function ($scope, $timeout) {
   // NOTE: testing here
-  $scope.showLogin = true;
-  $scope.fadeOut = function() {
-    $scope.showLogin = false;
-  };
+    // $scope.startFade = true;
+    // $timeout(function(){
+    //     $scope.hidden = true;
+    // }, 3000);
   // NOTE: testing here
 }])
 
@@ -193,6 +193,18 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
   // NOTE: get user name
   console.log(UserStore.user[0].name);
   $scope.userName = UserStore.user[0].name.capitalize();
+  // TODO: get this to fire off when view loads, rather than when the initial app loads
+  // $scope.startFade = true;
+  // $timeout(function(){
+  //     $scope.hidden = true;
+  // }, 9000);
+  // NOTE: temp fix until above is solved
+  $scope.hideBox = function () {
+      $scope.startFade = true;
+      $timeout(function(){
+          $scope.hidden = true;
+      }, 4000);
+  };
 
 
 }])

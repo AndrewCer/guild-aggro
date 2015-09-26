@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="login-fade-bar message fadeout" ng-show:'showLogin'>
+    <div class="login-fade-bar" ng-hide="hidden" ng-class="{fade: startFade}">
       Thank you {{userName}} you've been signed in
-      <span><i id="fade-bar-x" class="fa fa-times pull-right"></i></span>
+      <span><i id="fade-bar-x" class="fa fa-times pull-right" ng-click='hideBox()'></i></span>
     </div>
   </div>
 </div>
