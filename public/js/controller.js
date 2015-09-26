@@ -203,7 +203,7 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
       $scope.startFade = true;
       $timeout(function(){
           $scope.hidden = true;
-      }, 4000);
+      }, 1000);
   };
 
 
