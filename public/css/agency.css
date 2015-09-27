@@ -1004,10 +1004,16 @@ body {
   cursor: pointer;
 }
 
+.guild-signup {
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
 .feature-highlights {
   background-color: black;
   color: white;
   height: 600px;
+  padding-top: 90px;
 }
 
 /* box shadow version */

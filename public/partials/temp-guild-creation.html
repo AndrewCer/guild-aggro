@@ -42,7 +42,7 @@
      </div>
    </nav>
    <div class="container push-top">
-     <div class="container col-md-8">
+     <div class="container col-md-8 guild-signup">
        <div class="row">
          <div class="container col-md-12">
            <h2>Your Guild <span class="color-red">Aggro</span> Site Info</h2>
@@ -50,7 +50,7 @@
          </div>
            <div class="container">
                <div class="row">
-                   <div class="col-lg-12">
+                   <div class="col-lg-11">
                        <form ng-submit='accountCreation()' novalidate>
                            <div class="row">
                                <div class="col-md-8">
@@ -94,7 +94,7 @@
                                <button type="button" ng-hide='allPass' class="btn btn-xl disabled">Create Guild</button>
                              </div>
                              <div class="col-md-8">
-                               <button type="button" class="btn btn-primary cancel" data-dismiss="modal" ng-click='closeModal()'><i class="fa fa-times"></i> Cancel</button>
+                               <button type="button" class="btn btn-primary cancel" data-dismiss="modal" ng-click='goHome()'><i class="fa fa-times"></i> Cancel</button>
                              </div>
                            </div>
                        </form>
@@ -105,6 +105,53 @@
      </div>
      <!-- TODO: hide this section on mobile view -->
      <div class="container col-md-4 feature-highlights">
-       have feature highliights over here
+         <h4>Feature Highlights</h4>
+       <div class="container">
+         <div class="row">
+           <p><b>Real-Time Chat</b></p>
+           <div class="col-md-4">
+             <p>Instant chat messaged with all of your guild mates</p>
+           </div>
+         </div>
+         <div class="row">
+           <p><b>Guild Forums</b></p>
+           <div class="col-md-4">
+             <p>Guild forums for all of your theorycrafting action</p>
+           </div>
+         </div>
+         <div class="row">
+           <p><b>Moar highlights!!!!</b></p>
+           <div class="col-md-4">
+             <p>moar moar moar moar moar moar moar moar moar moar moar moar moar moar</p>
+           </div>
+         </div>
+       </div>
      </div>
    </div>
+   <footer>
+       <div class="container">
+           <div class="row">
+               <div class="col-md-4">
+                   <span class="copyright">&copy; Andrew Cer 2015</span>
+               </div>
+               <div class="col-md-4">
+                   <ul class="list-inline social-buttons">
+                       <li><a href="#"><i class="fa fa-twitter"></i></a>
+                       </li>
+                       <li><a href="#"><i class="fa fa-facebook"></i></a>
+                       </li>
+                       <li><a href="https://www.linkedin.com/in/andrewcer" target="_blank"><i class="fa fa-linkedin"></i></a>
+                       </li>
+                   </ul>
+               </div>
+               <div class="col-md-4">
+                   <ul class="list-inline quicklinks">
+                       <li><a href="#">Privacy Policy</a>
+                       </li>
+                       <li><a href="#">Terms of Use</a>
+                       </li>
+                   </ul>
+               </div>
+           </div>
+       </div>
+   </footer>
