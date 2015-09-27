@@ -1007,6 +1007,7 @@ body {
 .guild-signup {
   background-color: #f7f7f7;
   padding: 20px;
+  box-shadow: 1px 1px 5px black;
 }
 
 .feature-highlights {
@@ -1014,6 +1015,10 @@ body {
   color: white;
   height: 600px;
   padding-top: 90px;
+}
+
+.form-control {
+  box-shadow: none!important;
 }
 
 /* box shadow version */
