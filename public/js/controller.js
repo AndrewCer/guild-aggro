@@ -4,11 +4,14 @@ String.prototype.capitalize = function(){
     });
 };
 
-app.controller('MasterController', ['$scope', '$location', '$anchorScroll', function ($scope, $location, $anchorScroll) {
+app.controller('MasterController', ['$scope', '$location', '$anchorScroll', '$window', function ($scope, $location, $anchorScroll, $window) {
   $scope.closeModal = function () {
     $location.path('/');
     $location.hash('portfolio');
     $anchorScroll();
+  }
+  $scope.goHome = function () {
+    $window.location = '/'
   }
 }])
 
@@ -189,10 +192,12 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
 
 app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', '$timeout', 'UserStore', function ($scope, $window, $location, $http, $timeout, UserStore) {
   // NOTE: get user id
-  console.log(UserStore.user[0].ident);
+  // console.log(UserStore.user[0].ident);
   // NOTE: get user name
-  console.log(UserStore.user[0].name);
-  $scope.userName = UserStore.user[0].name.capitalize();
+  // console.log(UserStore.user[0].name);
+  // $scope.userName = UserStore.user[0].name.capitalize();
+  /// NOTE: used for building page template
+  $scope.userName = 'andrew'.capitalize();
   // TODO: get this to fire off when view loads, rather than when the initial app loads
   // $scope.startFade = true;
   // $timeout(function(){

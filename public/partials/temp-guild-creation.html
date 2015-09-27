@@ -1,0 +1,108 @@
+<!-- <div class="container">
+  <div class="row">
+    <div class="login-fade-bar" ng-hide="hidden" ng-class="{fade: startFade}">
+      Thank you {{userName}} you've been signed in!
+      <span><i id="fade-bar-x" class="fa fa-times pull-right" ng-click='hideBox()'></i></span>
+    </div>
+  <h1>(Temp) Guild Creation Page</h1>
+  <h1>Welcome {{userName}}</h1>
+  </div>
+</div> -->
+<!-- Fixed navbar -->
+   <nav class="navbar navbar-default navbar-fixed-top non-splash">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="#">Guild Aggro</a>
+       </div>
+       <div id="navbar" class="navbar-collapse collapse">
+         <ul class="nav navbar-nav navbar-right">
+           <li><a class="change-mouse" ng-click='goHome()'>Home</a></li>
+           <li><a href="#about">About</a></li>
+           <li><a href="#contact">Contact</a></li>
+           <li class="dropdown">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+             <ul class="dropdown-menu">
+               <li><a href="#">Action</a></li>
+               <li><a href="#">Another action</a></li>
+               <li><a href="#">Something else here</a></li>
+               <li role="separator" class="divider"></li>
+               <li class="dropdown-header">Nav header</li>
+               <li><a href="#">Separated link</a></li>
+               <li><a href="#">One more separated link</a></li>
+             </ul>
+           </li>
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div>
+   </nav>
+   <div class="container push-top">
+       <div class="row">
+           <div>
+               <div>
+                 <div class="container col-md-12">
+                   <h2>Your Guild <span class="color-red">Aggro</span> Site Info</h2>
+                   <p class="item-intro text-muted">Almost there!</p>
+                 </div>
+                   <div class="container">
+                       <div class="row">
+                           <div class="col-lg-12">
+                               <form ng-submit='accountCreation()' novalidate>
+                                   <div class="row">
+                                       <div class="col-md-8">
+                                         <div class="form-group">
+                                           <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='nameAvailable'> Name Available</i>
+                                           <i class="fa fa-times-circle-o x-mark" style="font-size: 1.3em;" ng-show='nameUnAvailable'> Name Unavailable</i>
+                                           <h4>Domain</h4>
+                                           <input autofocus ng-blur='checkDb("name")' ng-change='instaValidation(userHandle, "User name")' type="text" class="form-control" ng-class="{'fill-red': nameUnAvailable, 'fill-green': nameAvailable}"  placeholder="www.guildaggro.com/yoursite" id="user-name" ng-model='userHandle'>
+                                           <p ng-repeat='error in handleError' class="help-block text-danger">{{error}}</p>
+                                         </div>
+                                         <div class="form-group">
+                                           <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='emailAvailable'> Email Available</i>
+                                           <i class="fa fa-times-circle-o x-mark" style="font-size: 1.3em;" ng-show='emailUnAvailable'> Email Unavailable</i>
+                                          <h4>Site Name</h4>
+                                           <input ng-blur='checkDb("email")' ng-change='instaValidation(email, "Email")' type="text" class="form-control" ng-class="{'fill-red': emailUnAvailable, 'fill-green': emailAvailable}"  placeholder="e.g. Method" id="email" ng-model='email'>
+                                           <p ng-repeat='error in emailError' class="help-block text-danger">{{error}}</p>
+                                         </div>
+                                         <div class="form-group">
+                                           <h4>Game</h4>
+                                           <p>This input field should be a dropdown with a search box built in</p>
+                                           <input ng-change='samenessCheck(email, emailConfirm, "email")' type="text" class="form-control" ng-class="{'fill-red': emailUnAvailable, 'fill-red': emailNonMatch, 'fill-green': emailPass}" placeholder="Dropdown input here" id="email-confirm" ng-model='emailConfirm'>
+                                           <p class="help-block text-danger">{{emailConfirmError}}</p>
+                                         </div>
+                                         <div class="form-group">
+                                           <h4>Faction</h4>
+                                           <p>(display when it applies...hide if game selected doesn't have factions)</p>
+                                           <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='passLength'>Long Passwords are Strong Passwords ({{password.length}}/30)</i>
+                                           <input type="password" ng-change='instaValidation(password, "Password")' class="form-control" ng-class="{'fill-red': passwordFillError, 'fill-green': passwordPassed}" placeholder="Faction" id="password" ng-model='password'>
+                                           <p ng-repeat='error in passwordError' class="help-block text-danger">{{error}}</p>
+                                         </div>
+                                         <div class="form-group">
+                                           <h4>Server</h4>
+                                           <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='passConfirmPassed'>Passwords Match</i>
+                                           <input ng-change='samenessCheck(password, passwordConfirm, "password")' type="password" class="form-control" ng-class="{'fill-red': passConfirmError, 'fill-green': passConfirmPassed}" placeholder="Server" ng-model='passwordConfirm' id="password-confirm">
+                                           <p class="help-block text-danger">{{passwordConfirmError}}</p>
+                                         </div>
+                                       </div>
+                                       <div class="clearfix"></div>
+                                     <div class="col-md-8">
+                                       <button type="submit" ng-show='allPass' class="btn btn-xl">Create Guild</button>
+                                       <button type="button" ng-hide='allPass' class="btn btn-xl disabled">Create Guild</button>
+                                     </div>
+                                     <div class="col-md-8">
+                                       <button type="button" class="btn btn-primary cancel" data-dismiss="modal" ng-click='closeModal()'><i class="fa fa-times"></i> Cancel</button>
+                                     </div>
+                                   </div>
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>

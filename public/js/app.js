@@ -14,5 +14,9 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       templateUrl: 'partials/guild-creation.html',
       controller: 'GuildCreationController'
     })
+    .when('/temp-guild-creation', {
+      templateUrl: 'partials/temp-guild-creation.html',
+      controller: 'GuildCreationController'
+    })
     $locationProvider.html5Mode(true);
 }])
