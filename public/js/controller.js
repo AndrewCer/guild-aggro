@@ -210,6 +210,6 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
           $scope.hidden = true;
       }, 1000);
   };
-
+  $scope.tempSeedGameData = ['World of Warcraft', 'Aion', 'Final Fantasy', 'Age of Conan', 'Eve']
 
 }])
