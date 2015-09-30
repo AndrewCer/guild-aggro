@@ -6,6 +6,13 @@ var users = db.get('users');
 var validateSignUp = require('../lib/validations.js');
 var bcrypt = require('bcrypt');
 
+// NOTE: rough guilds collection schema
+// guilds {
+//   this.domain:
+//   this.gName:
+//   this.
+// }
+
 router.post('/check-db', function (req, res) {
   // TODO: can also use this to check if guilds are available!
   var toCheck = req.body.toCheck.input.toLowerCase();

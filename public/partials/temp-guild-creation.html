@@ -65,7 +65,7 @@
                                  <div class="form-group">
                                    <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='emailAvailable'> Email Available</i>
                                    <i class="fa fa-times-circle-o x-mark" style="font-size: 1.3em;" ng-show='emailUnAvailable'> Email Unavailable</i>
-                                  <h4>Site Name</h4>
+                                  <h4>Guild Name</h4>
                                    <input ng-blur='checkDb("email")' ng-change='instaValidation(email, "Email")' type="text" class="form-control" ng-class="{'fill-red': emailUnAvailable, 'fill-green': emailAvailable}"  placeholder="e.g. Method" id="email" ng-model='email'>
                                    <p ng-repeat='error in emailError' class="help-block text-danger">{{error}}</p>
                                  </div>
@@ -100,9 +100,9 @@
                                    <h4>Site Template</h4>
                                    <div class="form-group">
                                      <select class="form-control">
-                                       <option>Template 1</option>
-                                       <option>Template 2</option>
-                                       <option>Template 3</option>
+                                       <option>Template 1 (Fire Red)</option>
+                                       <option>Template 2 (Leaf Green)</option>
+                                       <option>Template 3 (Blacky black black 'stealth mode')</option>
                                      </select>
                                    </div>
                                    <img src="$" alt="Template image here" />

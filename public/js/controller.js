@@ -69,9 +69,12 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
       }
     }
     if ($scope.handleError === null && $scope.passwordError === null && $scope.emailError === null && $scope.emailConfirmError === null && $scope.passwordConfirmError === null) {
-      // TODO: set ng animate to brightly color the button when this all passes
-      // TODO: also maybe do a db call to check if any of these names exists, if they do tell user
-      $scope.allPass = true;
+      if ($scope.nameUnAvailable === true || $scope.emailUnAvailable === true) {
+        $scope.allPass = false;
+      }
+      else {
+        $scope.allPass = true;
+      }
     }
   }
   $scope.samenessCheck = function (original, newInput, type) {
@@ -109,8 +112,12 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
     }
     if ($scope.handleError === null && $scope.passwordError === null && $scope.emailError === null && $scope.emailConfirmError === null && $scope.passwordConfirmError === null) {
       // TODO: set ng animate to brightly color the button when this all passes
-      // TODO: also maybe do a db call to check if any of these names exists, if they do tell user
-      $scope.allPass = true;
+      if ($scope.nameUnAvailable === true || $scope.emailUnAvailable === true) {
+        $scope.allPass = false;
+      }
+      else {
+        $scope.allPass = true;
+      }
     }
   }
   $scope.checkDb = function (input) {
