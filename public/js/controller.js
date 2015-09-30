@@ -24,7 +24,7 @@ app.controller('SplashController', ['$scope', '$timeout', function ($scope, $tim
   // NOTE: testing here
 }])
 
-app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', 'UserStore', function ($scope, $window, $location, $http, UserStore) {
+app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', 'UserStore', 'dbCheck', function ($scope, $window, $location, $http, UserStore, dbCheck) {
   var checkAvailability = function (type) {
     return $http.post('api/check-db', {toCheck: type})
     .then(function (response) {
@@ -121,12 +121,16 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
     }
   }
   $scope.checkDb = function (input) {
+    // NOTE: dbCheck calles a factor from a function to do an http.post to db
+    // dbCheck.getCheck(type).then(function (response) {
+    // })
     if (input === 'name') {
       if ($scope.handleError === null) {
         var toCheckObj = {};
         toCheckObj.input = $scope.userHandle;
         toCheckObj.spot = input;
-        checkAvailability(toCheckObj)
+        // checkAvailability(toCheckObj)
+        dbCheck.getCheck(toCheckObj)
         .then(function (value) {
           if (value.data === true) {
           $scope.allPass = false;
@@ -146,7 +150,8 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
         var toCheckObj = {};
         toCheckObj.input = $scope.email;
         toCheckObj.spot = input;
-        checkAvailability(toCheckObj)
+        // checkAvailability(toCheckObj)
+        dbCheck.getCheck(toCheckObj)
         .then(function (value) {
           if (value.data === true) {
             $scope.allPass = false;
@@ -211,6 +216,7 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
   //     $scope.hidden = true;
   // }, 9000);
   // NOTE: temp fix until above is solved
+  $scope.
   $scope.hideBox = function () {
       $scope.startFade = true;
       $timeout(function(){

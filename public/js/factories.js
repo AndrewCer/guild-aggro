@@ -8,3 +8,11 @@ app.factory('UserStore', function () {
   obj.user = userInformation;
   return obj
 })
+
+app.factory('dbCheck', function ($http) {
+  return {
+    getCheck: function (type) {
+      return $http.post('api/check-db', {toCheck: type})
+    }
+  }
+})
