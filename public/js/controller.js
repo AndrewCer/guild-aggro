@@ -25,12 +25,13 @@ app.controller('SplashController', ['$scope', '$timeout', function ($scope, $tim
 }])
 
 app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', 'UserStore', 'dbCheck', function ($scope, $window, $location, $http, UserStore, dbCheck) {
-  var checkAvailability = function (type) {
-    return $http.post('api/check-db', {toCheck: type})
-    .then(function (response) {
-      return response
-    })
-  }
+  // NOTE: refactored and moved into factory
+  // var checkAvailability = function (type) {
+  //   return $http.post('api/check-db', {toCheck: type})
+  //   .then(function (response) {
+  //     return response
+  //   })
+  // }
   $scope.instaValidation = function (input, spot) {
     // $scope.nameUnAvailable = false;
     // $scope.nameAvailable = false;
@@ -129,7 +130,6 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
         var toCheckObj = {};
         toCheckObj.input = $scope.userHandle;
         toCheckObj.spot = input;
-        // checkAvailability(toCheckObj)
         dbCheck.getCheck(toCheckObj)
         .then(function (value) {
           if (value.data === true) {
@@ -150,7 +150,6 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
         var toCheckObj = {};
         toCheckObj.input = $scope.email;
         toCheckObj.spot = input;
-        // checkAvailability(toCheckObj)
         dbCheck.getCheck(toCheckObj)
         .then(function (value) {
           if (value.data === true) {
@@ -216,13 +215,16 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
   //     $scope.hidden = true;
   // }, 9000);
   // NOTE: temp fix until above is solved
-  $scope.
+  $scope.tempSeedGameData = ['World of Warcraft', 'Aion', 'Final Fantasy', 'Age of Conan', 'Eve']
+  // $scope.selectedGame = null;
+  $scope.chooseGame = function (index) {
+    $scope.selectedGame = $scope.tempSeedGameData[index]
+  }
   $scope.hideBox = function () {
       $scope.startFade = true;
       $timeout(function(){
           $scope.hidden = true;
       }, 1000);
   };
-  $scope.tempSeedGameData = ['World of Warcraft', 'Aion', 'Final Fantasy', 'Age of Conan', 'Eve']
 
 }])
