@@ -217,8 +217,8 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
   // NOTE: temp fix until above is solved
   $scope.tempSeedGameData = ['World of Warcraft', 'Aion', 'Final Fantasy', 'Age of Conan', 'Eve']
   // $scope.selectedGame = null;
-  $scope.chooseGame = function (index) {
-    $scope.selectedGame = $scope.tempSeedGameData[index]
+  $scope.chooseGame = function (game) {
+    $scope.selectedGame = game
   }
   $scope.hideBox = function () {
       $scope.startFade = true;
@@ -227,4 +227,8 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
       }, 1000);
   };
 
+}])
+
+app.controller('BlueController', ['$scope', function ($scope) {
+  
 }])

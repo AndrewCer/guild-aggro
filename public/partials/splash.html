@@ -22,6 +22,9 @@
                       <a class="page-scroll" href="#services">About</a>
                   </li>
                   <li>
+                      <a class="page-scroll" href="#try">Try it out</a>
+                  </li>
+                  <li>
                     <a id="create-pulsor" class="page-scroll" href="#portfolio">Create</a>
                   </li>
                   <li>
@@ -29,6 +32,19 @@
                   </li>
                   <li>
                       <a class="page-scroll" href="#team">Team</a>
+                  </li>
+                  <!-- TODO: get this dropdown to work and take users to partials specific to their needs, i.e. all themes and such -->
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TL:DR<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li class="dropdown-header">Nav header</li>
+                      <li><a href="#">Separated link</a></li>
+                      <li><a href="#">One more separated link</a></li>
+                    </ul>
                   </li>
               </ul>
           </div>
@@ -64,6 +80,7 @@
           <div class="row">
               <div class="col-lg-12 text-center">
                   <h2 class="section-heading">About</h2>
+                  <h3>NOTE: Add more info on what this actually is</h3>
                   <h3 class="section-subheading text-muted">You create it, we save it.</h3>
               </div>
           </div>
@@ -99,12 +116,78 @@
       </div>
   </section>
 
+  <section id="try" class="bg-light-gray">
+      <div class="container text-center">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2 class="section-heading">Test a Theme</h2>
+                  <h3>NOTE: Show image of actual template for production</h3>
+                  <h3 class="section-subheading text-muted">Select a theme below</h3>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-4 template-item">
+                  <!-- <a href="/signup" class="portfolio-link" data-toggle="modal"> -->
+                  <a href="/blue-template" class="template-link">
+                      <!-- <div class="template-hover">
+                          <div class="template-hover-content">
+                              <i class="fa fa-plus fa-3x"></i>
+                          </div>
+                      </div> -->
+                      <div class="img-responsive">
+                      </div>
+                      <img src="http://topwalls.net/wp-content/uploads/2012/02/Arthas-Menethil-the-Lich-King-wow.jpg" class="img-responsive" alt="">
+                  <div class="portfolio-caption">
+                      <h4>Arthas</h4>
+                      <!-- <p class="text-muted">Click Here</p> -->
+                  </div>
+                  </a>
+              </div>
+              <div class="col-md-4 template-item">
+                  <!-- <a href="/signup" class="portfolio-link" data-toggle="modal"> -->
+                  <a href="#" class="template-link">
+                      <!-- <div class="template-hover">
+                          <div class="template-hover-content">
+                              <i class="fa fa-plus fa-3x"></i>
+                          </div>
+                      </div> -->
+                      <div class="img-responsive">
+                      </div>
+                      <img src="http://36646d87786feafc0611-0338bbbce19fc98919c6293def4c5554.r0.cf1.rackcdn.com/images/37JP84WnrmUV.878x0.Z-Z96KYq.jpg" class="img-responsive" alt="">
+                  <div class="portfolio-caption">
+                      <h4>Legion</h4>
+                      <!-- <p class="text-muted">Click Here</p> -->
+                  </div>
+                  </a>
+              </div>
+              <div class="col-md-4 template-item">
+                  <!-- <a href="/signup" class="portfolio-link" data-toggle="modal"> -->
+                  <a href="#" class="template-link">
+                      <!-- <div class="template-hover">
+                          <div class="template-hover-content">
+                              <i class="fa fa-plus fa-3x"></i>
+                          </div>
+                      </div> -->
+                      <div class="img-responsive">
+                      </div>
+                      <img src="http://2.bp.blogspot.com/-J3CorBlDkRE/T8zE6cnloWI/AAAAAAAAFtw/KDsy_8hnJ2Y/s1600/WOW+CATA.jpg" class="img-responsive" alt="">
+                  <div class="portfolio-caption">
+                      <h4>Cataclysm</h4>
+                      <!-- <p class="text-muted">Click Here</p> -->
+                  </div>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </section>
+
   <!-- Portfolio Grid Section -->
-  <section id="portfolio" class="bg-light-gray">
+  <section id="portfolio">
       <div class="container">
           <div class="row">
               <div class="col-lg-12 text-center">
                   <h2 class="section-heading">Create</h2>
+                  <h3>NOTE: add pulsor effect over/around image to show users what to click</h3>
                   <h3 class="section-subheading text-muted">Your own person guild site is just a few clicks away!</h3>
                   <!-- <i class="fa fa-arrow-circle-down text-primary"></i> -->
               </div>
@@ -132,11 +215,12 @@
   </section>
 
   <!-- About Section -->
-  <section id="about">
+  <section id="about"  class="bg-light-gray">
       <div class="container">
           <div class="row">
               <div class="col-lg-12 text-center">
                   <h2 class="section-heading">Guide</h2>
+                  <h3>NOTE: add images of the steps to each circle. See markup for where to put them</h3>
                   <h3 class="section-subheading text-muted">Four Step Guild Creation System</h3>
               </div>
           </div>
@@ -213,7 +297,7 @@
   </section>
 
   <!-- Team Section -->
-  <section id="team" class="bg-light-gray">
+  <section id="team">
       <div class="container">
           <div class="row">
               <div class="col-lg-12 text-center">
@@ -246,7 +330,7 @@
       </div>
   </section>
 
-  <footer>
+  <footer  class="bg-light-gray">
       <div class="container">
           <div class="row">
               <div class="col-md-4">
