@@ -1132,7 +1132,12 @@ body {
 
 .post-title {
   margin-bottom: 0px;
+  font-size: 20px;
   color: #caad83;
+}
+
+.post-message {
+  font-size: 12px;
 }
 
 .edit-post {
@@ -1146,6 +1151,7 @@ body {
 #layouts-fonts {
   font-size: 7px;
   background-image: url('http://www.htcinc.net/media/layout/navbar-bg.png');
+  /*top: 0;*/
 }
 
 #layouts-fonts li:hover {
