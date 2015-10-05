@@ -229,6 +229,11 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
 
 }])
 
+
+// TODO: setup timezone conversion from users local browser to guilds saved timezone
+// TODO: server status battlenet api integration
+// TODO: setup calendar plugin
+// TODO: setup forums
 app.controller('BlueController', ['$scope', '$http', function ($scope, $http) {
   $scope.leftColClass = 'col-md-3';
   $scope.midColClass = 'col-md-6';
