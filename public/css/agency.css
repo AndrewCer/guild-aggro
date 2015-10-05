@@ -1031,10 +1031,6 @@ body {
   list-style-type: none;
 }
 
-.user-nav {
-
-}
-
 .user-nav li{
   list-style-type: none;
   display: inline-block;
@@ -1048,12 +1044,12 @@ body {
 
 .banner {
   margin-top: 10px;
-  border-width: 10px;
-  border-color: transparent;
-  border-radius: 5px;
+  border-width: 1px;
+  border-color: white;
+  /*border-radius: 5px;*/
   border-style: solid;
   background-color: #111111;
-  box-shadow: 0 0 10px white;
+  box-shadow: 0 0 2px blue;
 }
 
 .banner-img {
@@ -1063,18 +1059,24 @@ body {
 
 .arthas {
   background-image: url('http://www.htcinc.net/media/layout/navbar-bg.png');
-  /*border-color: transparent;*/
-  /*border-radius: 5px;*/
   background-color: #191919;
+}
+
+.arthas-navbar {
+  margin-top: 10px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 1);
 }
 
 .arthas-navbar li {
   font-size: 2em;
   display: inline-block;
+  margin-right: 10%;
 }
 
 .arthas-navbar li:hover {
   cursor: pointer;
+  color: #5BC0EB;
+  text-decoration: underline;
 }
 
 .block-content, .block-header, .block-footer {
@@ -1085,6 +1087,10 @@ body {
 
 .block-header, .arthas-navbar {
   color: #FEFBF7;
+}
+
+.arthas-footer {
+  color: #aaaaaa;
 }
 
 .block-content, .block-header, .block-footer {
