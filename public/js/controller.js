@@ -287,6 +287,26 @@ app.controller('BlueController', ['$scope', function ($scope) {
   }
   $scope.setCols = function (selection) {
     console.log(selection);
+    if (selection === 3) {
+      $scope.leftColClass = 'col-md-3';
+      $scope.midColClass = 'col-md-6';
+      $scope.rightColClass = 'col-md-3';
+    }
+    if (selection === "left") {
+      $scope.leftColClass = 'col-md-3';
+      $scope.midColClass = 'col-md-9';
+      $scope.rightColClass = 'dont-display';
+    }
+    if (selection === 'right') {
+      $scope.leftColClass = 'dont-display';
+      $scope.midColClass = 'col-md-9';
+      $scope.rightColClass = 'col-md-3';
+    }
+    if (selection === 1) {
+      $scope.leftColClass = 'dont-display';
+      $scope.midColClass = 'col-md-12';
+      $scope.rightColClass = 'dont-display';
+    }
   }
   $scope.posts = [
     {
