@@ -229,7 +229,7 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
 
 }])
 
-app.controller('BlueController', ['$scope', function ($scope) {
+app.controller('BlueController', ['$scope', '$http', function ($scope, $http) {
   $scope.leftColClass = 'col-md-3';
   $scope.midColClass = 'col-md-6';
   $scope.rightColClass = 'col-md-3';
@@ -308,12 +308,15 @@ app.controller('BlueController', ['$scope', function ($scope) {
       $scope.rightColClass = 'dont-display';
     }
   }
+  $scope.dateValue = new Date();
+  // NOTE: database stuff
   $scope.posts = [
     {
       title: 'guild raid tonight',
       message: 'PBR&B stumptown trust fund put a bird on it Intelligentsia lumbersexual. Master cleanse vinyl disrupt, lomo Pinterest kogi cornhole hella. Literally wayfarers vinyl mixtape. Blog Blue Bottle lumbersexual, wayfarers beard cray gentrify lo-fi kitsch trust fund health goth quinoa roof party brunch aesthetic. Fap organic Vice, Thundercats cliche street art readymade jean shorts fixie four loko selvage tofu. XOXO kitsch Intelligentsia hoodie. Locavore Portland literally authentic, Bushwick wolf four dollar toast.',
       poster: 'Andrew',
       comments: ['yea','sweet'],
+      // TODO: find out how to insert an image into database to store users image
       avatar: 'http://www.forumsx.net/images/avatars/lotc_book_thrall.jpg'
     },
     {
@@ -331,4 +334,37 @@ app.controller('BlueController', ['$scope', function ($scope) {
       avatar: "http://33.media.tumblr.com/avatar_90e03d96d8dc_128.png"
     }
   ];
+  $scope.recruitment = [
+    {
+      type: 'Warrior',
+      image: '/images/class-thumbs/warrior.png',
+      alt: 'warrior',
+      status: 'OPEN'
+    },
+    {
+      type: 'Priest',
+      image: '/images/class-thumbs/priest.png',
+      alt: 'priest',
+      status: 'CLOSED'
+    },
+    {
+      type: 'Mage',
+      image: '/images/class-thumbs/mage.png',
+      alt: 'mage',
+      status: 'OPEN'
+    },
+    {
+      type: 'Rogue',
+      image: '/images/class-thumbs/rogue.png',
+      alt: 'rogue',
+      status: 'OPEN'
+    }
+  ]
+  $scope.guildInfo = {
+    server: 'Medivh',
+    status: "Online"
+  }
+  if ($scope.guildInfo.status === 'Online') {
+    $scope.guildInfo.serverStatus = '/images/status-icons/up.gif';
+  }
 }])

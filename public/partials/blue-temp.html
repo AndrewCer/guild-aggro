@@ -40,10 +40,15 @@
               </div>
             </div>
             <div class="block-content">
-              We are looking for: bla bla bla bla bla bla
+              <p>Availability:</p>
+              <div class="display-classes" ng-repeat='job in recruitment'>
+                <img src="{{job.image}}" alt="{{job.alt}}"/><p>{{job.type}}</p>
+                <p class="text-muted pull-right">{{job.status}}</p>
+              </div>
             </div>
             <div class="block-footer">
-
+              <!-- <p>Apply</p> -->
+              <button type="button" class="btn tinny-button">Apply</button>
             </div>
           </div>
           <div class="side-block block pole">
@@ -70,7 +75,7 @@
             <!-- <div class="block-content" ng-show='postedTitle'> -->
             <div class="block-content" ng-repeat='post in posts'>
               <!-- TODO: ng-repeat for the first 5 posts in db -->
-              <img class="poster-avatar mini-avatar" src="{{post.avatar}}" alt="avatar" />
+              <img class="poster-avatar mini-avatar" src="{{post.avatar}}" alt="avatar"/>
               <h1 class="post-title">{{post.title}}</h1>
               <p class="text-muted post-info">By <a href='#'>{{post.poster}}</a> on (Date)</p>
               <p class="post-message">{{post.message}}</p>
@@ -93,7 +98,7 @@
               <form ng-submit='contentPost()'>
                 <div class="form-group">
                   <label for="subject">Subject</label>
-                  <input type="text" class="form-control" id="subject" ng-model='pTitle' value="pTitle">
+                  <input type="text" autofocus class="form-control" id="subject" ng-model='pTitle' value="pTitle">
                 </div>
                 <div class="form-group">
                   <label for="posting">Entry:</label>
@@ -113,6 +118,7 @@
               </div>
             </div>
             <div class="block-content">
+              <img class="poster-avatar mini-avatar" src="{{post.avatar}}" alt="avatar"/>
               <h1 class="post-title">{{pTitle}}</h1>
               <p class="text-muted post-info">By <a href='#'>Member</a> on (Date)</p>
               <p class="post-message">{{pMessage}}</p>
@@ -157,7 +163,12 @@
               </div>
             </div>
             <div class="block-content">
-              This will show the guilds time zone
+              <div class="time-zone-time">{{dateValue | date:'shortTime'}}</div>
+              <div class="time-zone-date">
+                <div class="tz-date">{{dateValue | date:'MMM dd'}}</div>
+                <div class="tz-zone">MT</div>
+              </div>
+
             </div>
             <div class="block-footer">
 
@@ -169,8 +180,10 @@
                 Server Status
               </div>
             </div>
-            <div class="block-content">
-              This will show the guilds server status
+            <div class="block-content text-center">
+              <h4>{{guildInfo.server}}</h4>
+              <img class="status-icon" src="{{guildInfo.serverStatus}}" alt="up or down arrow"/>
+              <p>{{guildInfo.status}}</p>
             </div>
             <div class="block-footer">
 
