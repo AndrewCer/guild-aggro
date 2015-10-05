@@ -313,19 +313,22 @@ app.controller('BlueController', ['$scope', function ($scope) {
       title: 'guild raid tonight',
       message: 'PBR&B stumptown trust fund put a bird on it Intelligentsia lumbersexual. Master cleanse vinyl disrupt, lomo Pinterest kogi cornhole hella. Literally wayfarers vinyl mixtape. Blog Blue Bottle lumbersexual, wayfarers beard cray gentrify lo-fi kitsch trust fund health goth quinoa roof party brunch aesthetic. Fap organic Vice, Thundercats cliche street art readymade jean shorts fixie four loko selvage tofu. XOXO kitsch Intelligentsia hoodie. Locavore Portland literally authentic, Bushwick wolf four dollar toast.',
       poster: 'Andrew',
-      comments: ['yea','sweet']
+      comments: ['yea','sweet'],
+      avatar: 'http://www.forumsx.net/images/avatars/lotc_book_thrall.jpg'
     },
     {
       title: 'We won',
       message: 'PBR&B stumptown trust fund put a bird on it Intelligentsia lumbersexual. Master cleanse vinyl disrupt, lomo Pinterest kogi cornhole hella. Literally wayfarers vinyl mixtape. Blog Blue Bottle lumbersexual, wayfarers beard cray gentrify lo-fi kitsch trust fund health goth quinoa roof party brunch aesthetic. Fap organic Vice, Thundercats cliche street art readymade jean shorts fixie four loko selvage tofu. XOXO kitsch Intelligentsia hoodie. Locavore Portland literally authentic, Bushwick wolf four dollar toast.',
       poster: 'John',
-      comments: ['yea','sweet']
+      comments: ['yea','sweet'],
+      avatar: "http://media-hearth.cursecdn.com/avatars/207/702/635655008955091849.png"
     },
     {
       title: 'first post woo!',
       message: 'PBR&B stumptown trust fund put a bird on it Intelligentsia lumbersexual. Master cleanse vinyl disrupt, lomo Pinterest kogi cornhole hella. Literally wayfarers vinyl mixtape. Blog Blue Bottle lumbersexual, wayfarers beard cray gentrify lo-fi kitsch trust fund health goth quinoa roof party brunch aesthetic. Fap organic Vice, Thundercats cliche street art readymade jean shorts fixie four loko selvage tofu. XOXO kitsch Intelligentsia hoodie. Locavore Portland literally authentic, Bushwick wolf four dollar toast.',
       poster: 'Steve',
-      comments: ['yea','sweet']
+      comments: ['yea','sweet'],
+      avatar: "http://33.media.tumblr.com/avatar_90e03d96d8dc_128.png"
     }
   ];
 }])
