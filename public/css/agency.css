@@ -1061,12 +1061,57 @@ body {
   height: 200px;
 }
 
-.arthas-navbar {
-  /*background-image: url('http://www.htcinc.net/media/layout/navbar-bg.png');*/
-  /*border-width: 10px;*/
-  border-color: transparent;
-  border-radius: 5px;
-  background-color: #111111;
+.arthas {
+  background-image: url('http://www.htcinc.net/media/layout/navbar-bg.png');
+  /*border-color: transparent;*/
+  /*border-radius: 5px;*/
+  background-color: #191919;
+}
+
+.arthas-navbar li {
+  font-size: 2em;
+  display: inline-block;
+}
+
+.arthas-navbar li:hover {
+  cursor: pointer;
+}
+
+.block-content, .block-header, .block-footer {
+  color: #aaaaaa;
+  border: 1px solid rgba(255,255,255, 0.2);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 1);
+}
+
+.block-header, .arthas-navbar {
+  color: #FEFBF7;
+}
+
+.block-content, .block-header, .block-footer {
+  padding: 10px;
+}
+
+.block-content {
+  margin-top: 2px;
+  /*background-color: white;*/
+}
+
+.block-footer {
+  height: 40px;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
+.side-block {
+  max-height: 345px;
+}
+
+#left-column {
+  padding-left: 0;
+}
+
+#right-column {
+  padding-right: 0;
 }
 
 /* box shadow version */
