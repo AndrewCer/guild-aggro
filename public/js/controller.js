@@ -230,6 +230,9 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
 }])
 
 app.controller('BlueController', ['$scope', function ($scope) {
+  $scope.leftColClass = 'col-md-3';
+  $scope.midColClass = 'col-md-6';
+  $scope.rightColClass = 'col-md-3';
   $scope.homeShow = true;
   $scope.postContent = function () {
     $scope.homeShow = false;
@@ -270,10 +273,39 @@ app.controller('BlueController', ['$scope', function ($scope) {
     $scope.homeShow = true;
     $scope.previewShow = false;
     $scope.addContentShow = false;
-    $scope.postedTitle = $scope.pTitle;
-    $scope.postedMessage = $scope.pMessage;
+    // $scope.postedTitle = $scope.pTitle;
+    // $scope.postedMessage = $scope.pMessage;
+    $scope.posts.unshift({
+      title: $scope.pTitle,
+      message: $scope.pMessage,
+      poster: 'Andrew',
+      comments: []
+    })
+    $scope.pTitle = null;
+    $scope.pMessage = null;
+
   }
   $scope.setCols = function (selection) {
     console.log(selection);
   }
+  $scope.posts = [
+    {
+      title: 'guild raid tonight',
+      message: 'message Tom for all the fun and exciting info',
+      poster: 'Andrew',
+      comments: ['yea','sweet']
+    },
+    {
+      title: 'We won',
+      message: 'such and such raid is now our bitch',
+      poster: 'John',
+      comments: ['yea','sweet']
+    },
+    {
+      title: 'first post woo!',
+      message: 'I cant believe we did it!',
+      poster: 'Steve',
+      comments: ['yea','sweet']
+    }
+  ];
 }])
