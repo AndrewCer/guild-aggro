@@ -1075,7 +1075,7 @@ body {
 
 .arthas-navbar li:hover {
   cursor: pointer;
-  color: #5BC0EB;
+  /*color: #5BC0EB;*/
   text-decoration: underline;
 }
 

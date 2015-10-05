@@ -230,5 +230,11 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
 }])
 
 app.controller('BlueController', ['$scope', function ($scope) {
-  
+  $scope.homeShow = true;
+  $scope.postContent = function () {
+    $scope.homeShow = false;
+  }
+  $scope.showHome = function () {
+    $scope.homeShow = true;
+  }
 }])

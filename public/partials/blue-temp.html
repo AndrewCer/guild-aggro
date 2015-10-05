@@ -1,121 +1,123 @@
 <!-- TODO: transition inline styles to stylesheet -->
-<div class="nabar" style="color: gray;">
-  <ul class="user-nav pull-right">
-    <li>Add dropdown here</li>
-    <li>Guild Name</li>
-    <li>Admin</li>
-    <li>User</li>
-  </ul>
-</div>
-<div class="wrapper" style="background-color:black">
-  <div class="container">
-    <div class="col-md-10 col-md-offset-1 arthas-blue">
-      <div class="banner">
-        <!-- <h2>Banner</h2> -->
-        <img class='banner-img' src="http://immortalisguild.com/blog/wp-content/uploads/2010/12/WotLKFarewell.jpg" alt="arthas" />
-      </div>
-      <div class="arthas-navbar block arthas" style="background-image: url('http://www.htcinc.net/media/layout/navbar-bg.png');">
-        <ul class="text-center">
-          <li>Home</li>
-          <li>Forums</li>
-          <li>Calendar</li>
-          <li>Post Content</li>
-        </ul>
-      </div>
-      <div id="left-column" class="col-md-3">
-        <div class="side-block block recruitment">
-          <div class="block-header arthas">
-            <div class="block-head-txt">
-              Recruitment
+<div ng-controller='BlueController'>
+  <div class="nabar" style="color: gray;">
+    <ul class="user-nav pull-right">
+      <li>Add dropdown here</li>
+      <li>Guild Name</li>
+      <li>Admin</li>
+      <li>User</li>
+    </ul>
+  </div>
+  <div class="wrapper" style="background-color:black">
+    <div class="container">
+      <div class="col-md-10 col-md-offset-1 arthas-blue">
+        <div class="banner">
+          <!-- <h2>Banner</h2> -->
+          <img class='banner-img' src="https://maxisbac.files.wordpress.com/2011/12/wraith-of-the-lich-king-banner.jpg" alt="arthas" />
+        </div>
+        <div class="arthas-navbar block arthas" style="background-image: url('http://www.htcinc.net/media/layout/navbar-bg.png');">
+          <ul class="text-center">
+            <li ng-click='showHome()'>Home</li>
+            <li>Forums</li>
+            <li>Calendar</li>
+            <li ng-click='postContent()'>Post Content</li>
+          </ul>
+        </div>
+        <div id="left-column" class="col-md-3">
+          <div class="side-block block recruitment">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Recruitment
+              </div>
+            </div>
+            <div class="block-content">
+              We are looking for: bla bla bla bla bla bla
+            </div>
+            <div class="block-footer">
+
             </div>
           </div>
-          <div class="block-content">
-            We are looking for: bla bla bla bla bla bla
-          </div>
-          <div class="block-footer">
+          <div class="side-block block pole">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Poll
+              </div>
+            </div>
+            <div class="block-content">
+              This will show a poles results: bla bla bla bla bla bla
+            </div>
+            <div class="block-footer">
 
-          </div>
-        </div>
-        <div class="side-block block pole">
-          <div class="block-header arthas">
-            <div class="block-head-txt">
-              Poll
             </div>
           </div>
-          <div class="block-content">
-            This will show a poles results: bla bla bla bla bla bla
-          </div>
-          <div class="block-footer">
-
-          </div>
         </div>
-      </div>
-      <div id="middle-column" class="col-md-6">
-        <div class="main-block block">
-          <div class="block-header arthas">
-            <div class="block-head-txt">
-              News
+        <div id="middle-column" class="col-md-6" ng-show='homeShow'>
+          <div class="main-block block">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                News
+              </div>
+            </div>
+            <div class="block-content">
+              ng-repeat here for "blog post" type content
+            </div>
+            <div class="block-content">
+              ng-repeat here for "blog post" type content
+            </div>
+            <div class="block-content">
+              ng-repeat here for "blog post" type content
+            </div>
+            <div class="block-footer">
+
             </div>
           </div>
-          <div class="block-content">
-            ng-repeat here for "blog post" type content
-          </div>
-          <div class="block-content">
-            ng-repeat here for "blog post" type content
-          </div>
-          <div class="block-content">
-            ng-repeat here for "blog post" type content
-          </div>
-          <div class="block-footer">
-
-          </div>
         </div>
-      </div>
-      <div id="right-column" class="col-md-3">
-        <div class="side-block block time-zone">
-          <div class="block-header arthas">
-            <div class="block-head-txt">
-              Time Zone
+        <div id="right-column" class="col-md-3">
+          <div class="side-block block time-zone">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Time Zone
+              </div>
+            </div>
+            <div class="block-content">
+              This will show the guilds time zone
+            </div>
+            <div class="block-footer">
+
             </div>
           </div>
-          <div class="block-content">
-            This will show the guilds time zone
-          </div>
-          <div class="block-footer">
+          <div class="side-block block server-status">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Server Status
+              </div>
+            </div>
+            <div class="block-content">
+              This will show the guilds server status
+            </div>
+            <div class="block-footer">
 
-          </div>
-        </div>
-        <div class="side-block block server-status">
-          <div class="block-header arthas">
-            <div class="block-head-txt">
-              Server Status
             </div>
           </div>
-          <div class="block-content">
-            This will show the guilds server status
-          </div>
-          <div class="block-footer">
+          <div class="side-block block calendar">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Calendar
+              </div>
+            </div>
+            <div class="block-content">
+              This will show a mini calendar widget
+            </div>
+            <div class="block-footer">
 
-          </div>
-        </div>
-        <div class="side-block block calendar">
-          <div class="block-header arthas">
-            <div class="block-head-txt">
-              Calendar
             </div>
           </div>
-          <div class="block-content">
-            This will show a mini calendar widget
-          </div>
-          <div class="block-footer">
-
-          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="arthas-footer text-center">
-          <p>Created by Mr. T</p>
-          <p>Other closing stuff</p>
+        <div class="row">
+          <div class="arthas-footer text-center">
+            <p>Created by Mr. T</p>
+            <p>Other closing stuff</p>
+          </div>
         </div>
       </div>
     </div>
