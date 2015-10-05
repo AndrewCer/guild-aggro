@@ -12,15 +12,24 @@
     <div class="container">
       <div class="col-md-10 col-md-offset-1 arthas-blue">
         <div class="banner">
-          <!-- <h2>Banner</h2> -->
+          <h2 class="banner-text">Arthas</h2>
           <img class='banner-img' src="https://maxisbac.files.wordpress.com/2011/12/wraith-of-the-lich-king-banner.jpg" alt="arthas" />
         </div>
         <div class="arthas-navbar block arthas" style="background-image: url('http://www.htcinc.net/media/layout/navbar-bg.png');">
           <ul class="text-center">
             <li ng-click='showHome()'>Home</li>
-            <li>Forums</li>
-            <li>Calendar</li>
-            <li ng-click='postContent()'>Post Content</li>
+            <li ng-click='showForum()'>Forums</li>
+            <li ng-click='showCalendar()'>Calendar</li>
+            <li ng-click='postContent()'>Post</li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle layouts-drop" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Layouts<span class="caret"></span></a>
+              <ul class="dropdown-menu" id="layouts-fonts">
+                <li><a ng-click='setCols(3)'>3 Columns</a></li>
+                <li><a ng-click='setCols("left")'>2 Columns Left</a></li>
+                <li><a ng-click='setCols("right")'>2 Columns Right</a></li>
+                <li><a ng-click='setCols(1)'>1 Column</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
         <div id="left-column" class="col-md-3">
@@ -51,21 +60,96 @@
             </div>
           </div>
         </div>
-        <div id="middle-column" class="col-md-6" ng-show='homeShow'>
-          <div class="main-block block">
+        <div id="middle-column" class="col-md-6">
+          <div class="main-block block"  ng-show='homeShow'>
             <div class="block-header arthas">
               <div class="block-head-txt">
                 News
               </div>
             </div>
-            <div class="block-content">
-              ng-repeat here for "blog post" type content
+            <div class="block-content" ng-show='postedTitle'>
+              <!-- TODO: ng-repeat for the first 5 posts in db -->
+              <h1 class="post-title">{{postedTitle}}</h1>
+              <p class="text-muted post-info">By <a href='#'>Member</a> on (Date)</p>
+              <p class="post-message">{{postedMessage}}</p>
+              <a class="col-md-offset-11 edit-post" ng-click='editPost'>Edit</a>
+              <!-- TODO: add seperator in here -->
+              <!-- ng-repeat here for "blog post" type content -->
             </div>
             <div class="block-content">
               ng-repeat here for "blog post" type content
             </div>
             <div class="block-content">
               ng-repeat here for "blog post" type content
+            </div>
+            <div class="block-content">
+              ng-repeat here for "blog post" type content
+            </div>
+            <div class="block-footer">
+              <!-- TODO: generate more posts -->
+              <a href="#" class="col-md-offset-11">More</a>
+            </div>
+          </div>
+          <div class="main-add-block block"  ng-show='addContentShow'>
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Add Content
+              </div>
+            </div>
+            <div class="block-content">
+              <form ng-submit='contentPost()'>
+                <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input type="text" class="form-control" id="subject" ng-model='pTitle' value="pTitle">
+                </div>
+                <div class="form-group">
+                  <label for="posting">Entry:</label>
+                  <textarea class="form-control" id='post-textarea' placeholder="Post message" ng-model='pMessage' value='pMessage'></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="block-footer">
+              <button type="button" class="btn btn-default" ng-click='contentPost()'>Post</button>
+              <button type="button" class="btn btn-default" ng-click='showPreview()'>Preview</button>
+            </div>
+          </div>
+          <div class="main-preview-block block"  ng-show='previewShow'>
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Preview
+              </div>
+            </div>
+            <div class="block-content">
+              <h1 class="post-title">{{pTitle}}</h1>
+              <p class="text-muted post-info">By <a href='#'>Member</a> on (Date)</p>
+              <p class="post-message">{{pMessage}}</p>
+            </div>
+            <div class="block-footer">
+              <button type="button" class="btn btn-default" ng-click='contentPost()'>Post</button>
+              <button type="button" class="btn btn-default" ng-click='postContent()'>Edit</button>
+            </div>
+          </div>
+          <div class="main-calendar-block block"  ng-show='calendarShow'>
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Calendar
+              </div>
+            </div>
+            <div class="block-content">
+
+            </div>
+            <div class="block-footer">
+
+            </div>
+          </div>
+          <div class="main-forum-block block"  ng-show='forumShow'>
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Forums
+              </div>
+            </div>
+            <div class="block-content">
+
             </div>
             <div class="block-footer">
 

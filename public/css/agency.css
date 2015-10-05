@@ -1070,7 +1070,7 @@ body {
 .arthas-navbar li {
   font-size: 2em;
   display: inline-block;
-  margin-right: 10%;
+  margin-right: 5%;
 }
 
 .arthas-navbar li:hover {
@@ -1103,7 +1103,7 @@ body {
 }
 
 .block-footer {
-  height: 40px;
+  max-height: 56px;
   margin-top: 2px;
   margin-bottom: 10px;
 }
@@ -1118,6 +1118,38 @@ body {
 
 #right-column {
   padding-right: 0;
+}
+
+.banner-text {
+  position: absolute;
+  padding: 20px;
+  color: white;
+}
+
+#post-textarea {
+  height: 150px;
+}
+
+.post-title {
+  margin-bottom: 0px;
+  color: #caad83;
+}
+
+.edit-post {
+  cursor: pointer;
+}
+
+.layouts-drop, .layouts-drop:hover, .layouts-drop:enabled {
+  color: white;
+}
+
+#layouts-fonts {
+  font-size: 7px;
+  background-image: url('http://www.htcinc.net/media/layout/navbar-bg.png');
+}
+
+#layouts-fonts li:hover {
+  text-decoration: none;
 }
 
 /* box shadow version */

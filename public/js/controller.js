@@ -233,8 +233,47 @@ app.controller('BlueController', ['$scope', function ($scope) {
   $scope.homeShow = true;
   $scope.postContent = function () {
     $scope.homeShow = false;
+    $scope.calendarShow = false;
+    $scope.previewShow = false;
+    $scope.forumShow = false;
+    $scope.addContentShow = true;
   }
   $scope.showHome = function () {
+    $scope.addContentShow = false;
+    $scope.calendarShow = false;
+    $scope.previewShow = false;
+    $scope.forumShow = false;
     $scope.homeShow = true;
+  }
+  $scope.showPreview = function () {
+    $scope.homeShow = false;
+    $scope.addContentShow = false;
+    $scope.calendarShow = false;
+    $scope.forumShow = false;
+    $scope.previewShow = true;
+  }
+  $scope.showForum = function () {
+    $scope.homeShow = false;
+    $scope.addContentShow = false;
+    $scope.calendarShow = false;
+    $scope.previewShow = false;
+    $scope.forumShow = true;
+  }
+  $scope.showCalendar = function () {
+    $scope.homeShow = false;
+    $scope.addContentShow = false;
+    $scope.calendarShow = true;
+    $scope.previewShow = false;
+    $scope.forumShow = false;
+  }
+  $scope.contentPost = function () {
+    $scope.homeShow = true;
+    $scope.previewShow = false;
+    $scope.addContentShow = false;
+    $scope.postedTitle = $scope.pTitle;
+    $scope.postedMessage = $scope.pMessage;
+  }
+  $scope.setCols = function (selection) {
+    console.log(selection);
   }
 }])
