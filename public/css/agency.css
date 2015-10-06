@@ -1052,9 +1052,15 @@ body {
   box-shadow: 0 0 2px blue;
 }
 
+.banner {
+  height: 250px;
+  width: 100%;
+  overflow: hidden;
+}
+
 .banner-img {
   width: 100%;
-  height: 200px;
+  /*height: 250px;*/
 }
 
 .arthas {
@@ -1124,7 +1130,7 @@ body {
 .banner-text {
   position: absolute;
   padding: 20px;
-  color: white;
+  color: #2783cc;
 }
 
 #post-textarea {
@@ -1193,7 +1199,7 @@ body {
 }
 
 .time-zone-time {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: bold;
   display: inline-block;
 }

@@ -234,11 +234,12 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
 // TODO: server status battlenet api integration
 // TODO: setup calendar plugin
 // TODO: setup forums
-app.controller('BlueController', ['$scope', '$http', function ($scope, $http) {
+app.controller('BlueController', ['$scope', '$http', '$interval', function ($scope, $http, $interval) {
   $scope.leftColClass = 'col-md-3';
   $scope.midColClass = 'col-md-6';
   $scope.rightColClass = 'col-md-3';
   $scope.homeShow = true;
+
   $scope.postContent = function () {
     $scope.homeShow = false;
     $scope.calendarShow = false;
