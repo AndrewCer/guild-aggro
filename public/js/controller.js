@@ -275,6 +275,7 @@ app.controller('BlueController', ['$scope', '$http', '$interval', function ($sco
     $scope.previewShow = false;
     $scope.forumShow = false;
   }
+  $scope.previewNewDate = new Date();
   $scope.contentPost = function () {
     $scope.homeShow = true;
     $scope.previewShow = false;
@@ -283,6 +284,8 @@ app.controller('BlueController', ['$scope', '$http', '$interval', function ($sco
     // $scope.postedMessage = $scope.pMessage;
     $scope.posts.unshift({
       title: $scope.pTitle,
+      avatar: 'http://vignette3.wikia.nocookie.net/wowwiki/images/6/68/WoW_Lich_King_Arthas.png/revision/latest?cb=20100221131133',
+      date: new Date(),
       message: $scope.pMessage,
       poster: 'Andrew',
       comments: []
@@ -292,7 +295,6 @@ app.controller('BlueController', ['$scope', '$http', '$interval', function ($sco
 
   }
   $scope.setCols = function (selection) {
-    console.log(selection);
     if (selection === 3) {
       $scope.leftColClass = 'col-md-3';
       $scope.midColClass = 'col-md-6';

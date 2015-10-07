@@ -77,7 +77,7 @@
               <!-- TODO: ng-repeat for the first 5 posts in db -->
               <img class="poster-avatar mini-avatar" src="{{post.avatar}}" alt="avatar"/>
               <h1 class="post-title">{{post.title}}</h1>
-              <p class="text-muted post-info">By <a href='#'>{{post.poster}}</a> on (Date)</p>
+              <p class="text-muted post-info">By <a href='#'>{{post.poster}}</a> on {{post.date | date:'MMMM dd, yyyy'}}</p>
               <p class="post-message">{{post.message}}</p>
               <a class="col-md-offset-11 edit-post" ng-click='editPost'>Edit</a>
               <!-- TODO: add seperator in here -->
@@ -118,9 +118,9 @@
               </div>
             </div>
             <div class="block-content">
-              <img class="poster-avatar mini-avatar" src="{{post.avatar}}" alt="avatar"/>
+              <img class="poster-avatar mini-avatar" src="http://vignette3.wikia.nocookie.net/wowwiki/images/6/68/WoW_Lich_King_Arthas.png/revision/latest?cb=20100221131133" alt="avatar"/>
               <h1 class="post-title">{{pTitle}}</h1>
-              <p class="text-muted post-info">By <a href='#'>Member</a> on (Date)</p>
+              <p class="text-muted post-info">By <a href='#'>Member</a> on {{previewNewDate | date:'MMMM dd, yyyy'}}</p>
               <p class="post-message">{{pMessage}}</p>
             </div>
             <div class="block-footer">
