@@ -34,9 +34,9 @@ app.use('/api', api);
 //   err.status = 404;
 //   next(err);
 // });
-// NOTE: This is only a convenience catch so pages dont break durring development
-// TODO: change to a catch redirect to 404 page after all pages have been build
+
 app.use(function(req, res, next) {
+  console.log(req.url.charAt[0]);
  if (req.url.charAt[0] != '#') {
    req.url = '/#' + req.url;
    res.redirect(req.url);

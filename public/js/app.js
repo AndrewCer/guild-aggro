@@ -22,5 +22,6 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       templateUrl: 'partials/temp-guild-creation.html',
       controller: 'GuildCreationController'
     })
+    .otherwise('/')
     $locationProvider.html5Mode(true);
 }])
