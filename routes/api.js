@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-// var db = require('monk')(process.env.MONGOLAB_URI);
-var db = require('monk')("localhost/guildaggro");
+var db = require('monk')(process.env.MONGOLAB_URI);
+// var db = require('monk')("localhost/guildaggro");
 var users = db.get('users');
 var guilds = db.get('guilds');
 var validateSignUp = require('../lib/validations.js');
