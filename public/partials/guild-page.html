@@ -66,10 +66,10 @@
             <!-- <div class="block-content" ng-show='postedTitle'> -->
             <div class="block-content" ng-repeat='post in posts'>
               <!-- TODO: ng-repeat for the first 5 posts in db -->
-              <img class="poster-avatar mini-avatar" src="{{post.avatar}}" alt="avatar"/>
+              <img class="poster-avatar mini-avatar" ng-src="" alt="avatar"/>
               <h1 class="post-title">{{post.title}}</h1>
-              <p class="text-muted post-info">By <a href='#'>{{post.poster}}</a> on {{post.date | date:'MMMM dd, yyyy'}}</p>
-              <p class="post-message">{{post.message}}</p>
+              <p class="text-muted post-info">By <a href='#'>{{post.user}}</a> on {{post.date | date:'MMMM dd, yyyy'}}</p>
+              <p class="post-message">{{post.body}}</p>
               <a class="col-md-offset-11 edit-post" ng-click='editPost'>Edit</a>
               <!-- TODO: add seperator in here -->
               <!-- ng-repeat here for "blog post" type content -->

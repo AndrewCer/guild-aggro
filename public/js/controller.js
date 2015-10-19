@@ -414,6 +414,7 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
   $http.post('api/get-guild', {gDomain: routeParam})
   .then(function (response) {
     if (response.data) {
+      console.log(response.data);
       $scope.leftColClass = 'col-md-3';
       $scope.midColClass = 'col-md-6';
       $scope.rightColClass = 'col-md-3';
@@ -421,10 +422,62 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
 
       //set page
       $scope.backgroundIm = response.data.backgroundIm;
-      if ($scope.backgroundIm === undefined) {
+      if ($scope.backgroundIm === null) {
         $scope.backgroundIm = 'http://www.damnwallpapers.com/wp-content/uploads/2013/07/lich-king-arthas-1080x1920.jpg';
       }
       $scope.guildName = response.data.name.capitalize();
+      $scope.posts = response.data.posts;
+
+      //nav divs
+      $scope.postContent = function () {
+        $scope.homeShow = false;
+        $scope.calendarShow = false;
+        $scope.previewShow = false;
+        $scope.forumShow = false;
+        $scope.addContentShow = true;
+      }
+      $scope.showHome = function () {
+        $scope.addContentShow = false;
+        $scope.calendarShow = false;
+        $scope.previewShow = false;
+        $scope.forumShow = false;
+        $scope.homeShow = true;
+      }
+      $scope.showPreview = function () {
+        $scope.homeShow = false;
+        $scope.addContentShow = false;
+        $scope.calendarShow = false;
+        $scope.forumShow = false;
+        $scope.previewShow = true;
+      }
+      $scope.showForum = function () {
+        $scope.homeShow = false;
+        $scope.addContentShow = false;
+        $scope.calendarShow = false;
+        $scope.previewShow = false;
+        $scope.forumShow = true;
+      }
+      $scope.showCalendar = function () {
+        $scope.homeShow = false;
+        $scope.addContentShow = false;
+        $scope.calendarShow = true;
+        $scope.previewShow = false;
+        $scope.forumShow = false;
+      }
+      $scope.contentPost = function () {
+        $scope.homeShow = true;
+        $scope.previewShow = false;
+        $scope.addContentShow = false;
+        //make api call to insert posts here
+        $http.post('api/guild-post', {guild: routeParam, postTitle: $scope.pTitle, postBody: $scope.pMessage})
+        .then(function (result) {
+          //after db is loaded do page refresh??
+          $scope.pTitle = null;
+          $scope.pMessage = null;
+        });
+
+      }
+
     }
     else {
       console.log('guild not found');

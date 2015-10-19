@@ -97,7 +97,7 @@ router.post('/guild-check', function (req, res) {
   var guildName = req.body.gName;
   var guildTempalte = req.body.gTemplate;
   var guildBackground = req.body.gBackground
-  guilds.insert({ domain: guildDomain, name: guildName, template: guildTempalte, backgroundIm: guildBackground})
+  guilds.insert({ domain: guildDomain, name: guildName, template: guildTempalte, backgroundIm: guildBackground, posts: []})
   .then(function (guild) {
     res.json(guild)
   })
@@ -115,6 +115,17 @@ router.post('/get-guild', function (req, res) {
       // console.log('found it');
       res.json(guild)
     }
+  })
+});
+
+router.post('/guild-post', function (req, res) {
+  var title = req.body.postTitle;
+  var body = req.body.postBody;
+  var guildDomain = req.body.guild;
+  var postedDate = new Date();
+  guilds.update({ domain: guildDomain }, { $push: {posts: {$each: [{title: title, body: body, user: 'fill-with-user-info-object', date: postedDate}], $position: 0}}})
+  .then(function (guild) {
+    res.json(true)
   })
 });
 
