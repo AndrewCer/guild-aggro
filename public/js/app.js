@@ -1,4 +1,4 @@
-var app = angular.module('guildAggro', ['ngRoute', 'ngAnimate']);
+var app = angular.module('guildAggro', ['ngRoute', 'ngAnimate', 'ngCookies']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
   $routeProvider

@@ -1,13 +1,12 @@
 <!-- TODO: transition inline styles to stylesheet -->
 <div>
-  <!-- <div class="nabar" style="color: gray;">
+  <div class="nabar" style="color: gray;">
     <ul class="user-nav pull-right">
-      <li>Add dropdown here</li>
-      <li>Guild Name</li>
+      <li>Welcome {{userName}}</li>
       <li>Admin</li>
       <li>User</li>
     </ul>
-  </div> -->
+  </div>
   <div class="wrapper" style="background-color:black">
     <div class="container">
       <div class="col-lg-12 arthas-blue">
@@ -27,29 +26,33 @@
           <div class="side-block block recruitment">
             <div class="block-header arthas">
               <div class="block-head-txt">
-                Recruitment
+                Member Count
               </div>
             </div>
             <div class="block-content">
-              <p>Availability:</p>
-              <div class="display-classes" ng-repeat='job in recruitment'>
+              <p>{{guildInfo.guildMember.length + guildInfo.guildMaster.length}}</p>
+              <!-- <div class="display-classes" ng-repeat='job in recruitment'>
                 <img src="{{job.image}}" alt="{{job.alt}}"/><p>{{job.type}}</p>
                 <p class="text-muted pull-right">{{job.status}}</p>
-              </div>
+              </div> -->
             </div>
             <div class="block-footer">
               <!-- <p>Apply</p> -->
-              <button type="button" class="btn tinny-button">Apply</button>
+              <!-- <button type="button" class="btn tinny-button">Apply</button> -->
             </div>
           </div>
           <div class="side-block block pole">
             <div class="block-header arthas">
               <div class="block-head-txt">
-                Poll
+                Guild Roster
               </div>
             </div>
             <div class="block-content">
-              This will show a poles results: bla bla bla bla bla bla
+              <p>Master: <b>{{guildMaster}}</b></p>
+              <p>Roster: </p>
+              <div ng-repeat='member in guildInfo.guildMember'>
+
+              </div>
             </div>
             <div class="block-footer">
 

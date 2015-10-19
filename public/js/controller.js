@@ -24,7 +24,7 @@ app.controller('SplashController', ['$scope', '$timeout', function ($scope, $tim
   // NOTE: testing here
 }])
 
-app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', 'UserStore', 'dbCheck', function ($scope, $window, $location, $http, UserStore, dbCheck) {
+app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', 'UserStore', 'dbCheck', '$cookies', function ($scope, $window, $location, $http, UserStore, dbCheck, $cookies) {
   // NOTE: refactored and moved into factory
   // var checkAvailability = function (type) {
   //   return $http.post('api/check-db', {toCheck: type})
@@ -186,12 +186,12 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
           console.log(response.data);
         }
         else {
-          //passed and inserted user into db
-          //pass data from db to a factory
+          //add cookie to browser
+          $cookies.put('user', response.data.ident);
           UserStore.userInfo(response.data);
           // TODO: figure out how to access this factory
           //redirect and access user info from another controller/partial
-          $location.path('/guild-creation')
+          $location.path('/temp-guild-creation')
         }
       })
     }
@@ -202,6 +202,8 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
 }])
 
 app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', '$timeout', 'UserStore', function ($scope, $window, $location, $http, $timeout, UserStore) {
+  // console.log(UserStore.user);
+  var userInfo = UserStore.user
   //temp
   $scope.allPass = true;
   $scope.checkDb = function () {
@@ -228,9 +230,14 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
       var gName = $scope.guildName;
       var gTemplate = $scope.template;
       var gBackground = $scope.guildBackground;
-      $http.post('api/guild-check', {gDomain: gDomain, gName: gName, gTemplate: gTemplate, gBackground: gBackground})
+      $http.post('api/guild-check', {gDomain: gDomain, gName: gName, gTemplate: gTemplate, gBackground: gBackground, gMaster: userInfo})
       .then(function (response) {
-        console.log(response.data);
+        if (response.data) {
+          $location.path('/guild/' + response.data.domain);
+        }
+        else {
+          console.log('something went wrong');
+        }
       });
     }
   }
@@ -409,7 +416,17 @@ app.controller('BlueController', ['$scope', '$http', '$interval', function ($sco
   }
 }])
 
-app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location', function ($scope, $http, $routeParams, $location) {
+app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location', 'UserStore', '$cookies', function ($scope, $http, $routeParams, $location, UserStore, $cookies) {
+  var getUserInfo = function () {
+    var userIdent = $cookies.get('user');
+    if (userIdent != undefined) {
+      $http.post('api/user-check', { userIdent: userIdent})
+      .then(function (response) {
+        $scope.userName = response.data.name.capitalize();
+      });  
+    }
+  }
+  getUserInfo();
   var routeParam = $routeParams.gDomain;
   $http.post('api/get-guild', {gDomain: routeParam})
   .then(function (response) {
@@ -425,7 +442,10 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
       if ($scope.backgroundIm === null) {
         $scope.backgroundIm = 'http://www.damnwallpapers.com/wp-content/uploads/2013/07/lich-king-arthas-1080x1920.jpg';
       }
+      // $scope.usersInfo = UserStore.user[0].name.capitalize();
+      $scope.guildInfo = response.data;
       $scope.guildName = response.data.name.capitalize();
+      $scope.guildMaster = response.data.guildMaster[0].name.capitalize();
       $scope.posts = response.data.posts;
 
       //nav divs

@@ -96,8 +96,9 @@ router.post('/guild-check', function (req, res) {
   var guildDomain = req.body.gDomain;
   var guildName = req.body.gName;
   var guildTempalte = req.body.gTemplate;
-  var guildBackground = req.body.gBackground
-  guilds.insert({ domain: guildDomain, name: guildName, template: guildTempalte, backgroundIm: guildBackground, posts: []})
+  var guildBackground = req.body.gBackground;
+  var guildMaster = req.body.gMaster;
+  guilds.insert({ domain: guildDomain, name: guildName, template: guildTempalte, backgroundIm: guildBackground, guildMaster: guildMaster, guildAdmin:[], guildMember:[], posts: []})
   .then(function (guild) {
     res.json(guild)
   })
@@ -126,6 +127,14 @@ router.post('/guild-post', function (req, res) {
   guilds.update({ domain: guildDomain }, { $push: {posts: {$each: [{title: title, body: body, user: 'fill-with-user-info-object', date: postedDate}], $position: 0}}})
   .then(function (guild) {
     res.json(true)
+  })
+});
+
+router.post('/user-check', function (req, res) {
+  var userId = req.body.userIdent;
+  users.findOne({ _id: userId })
+  .then(function (user) {
+    res.json({name: user.username});
   })
 });
 
