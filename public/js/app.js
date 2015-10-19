@@ -14,6 +14,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       templateUrl: 'partials/login.html',
       controller: 'LoginController'
     })
+    .when('/account', {
+      templateUrl: 'partials/user-account.html',
+      controller: 'UserAccountController'
+    })
     .when('/guild-creation', {
       templateUrl: 'partials/guild-creation.html',
       controller: 'GuildCreationController'

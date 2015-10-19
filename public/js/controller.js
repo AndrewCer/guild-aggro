@@ -443,10 +443,7 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
         $scope.showUserInfo = true;
         $scope.showLogin = false;
         $scope.userName = response.data.name.capitalize();
-        var userStoreObj = {};
-        userStoreObj.ident = userIdent;
-        userStoreObj.name = response.data.name;
-        UserStore.userInfo(userStoreObj);
+        UserStore.userInfo(response.data);
       });
     }
     if ($scope.userName === undefined) {
@@ -536,7 +533,13 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
         $scope.addContentShow = false;
         $http.post('api/guild-post', {guild: routeParam, postTitle: $scope.pTitle, postBody: $scope.pMessage, userInfo: UserStore.user })
         .then(function (result) {
-          //after db is loaded do page refresh??
+          $scope.posts.unshift({
+            title: $scope.pTitle,
+            postedBy: UserStore.user,
+            date: new Date(),
+            body: $scope.pMessage
+          })
+          console.log($scope.posts);
           $scope.pTitle = null;
           $scope.pMessage = null;
         });
@@ -549,4 +552,9 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
       $location.path('/');
     }
   })
-}])
+}]);
+
+app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$location', 'UserStore', '$cookies', function ($scope, $http, $routeParams, $location, UserStore, $cookies) {
+  //have two sections. one for admin stuff and other for general user stuff. If they are an
+  //admin of a guild, they can manipulate that guild otherwise they wont see admin section
+}]);

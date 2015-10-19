@@ -76,6 +76,7 @@ router.post('/auth', function (req, res) {
             var userObj = {}
             userObj.ident = user._id;
             userObj.name = user.username;
+            userObj.avatar = user.avatar
             res.json(userObj);
           })
         });
@@ -128,7 +129,11 @@ router.post('/user-check', function (req, res) {
   var userId = req.body.userIdent;
   users.findOne({ _id: userId })
   .then(function (user) {
-    res.json({name: user.username});
+    var userObj = {};
+    userObj.ident = user._id;
+    userObj.name = user.username;
+    userObj.avatar = user.avatar
+    res.json(userObj);
   })
 });
 
@@ -146,6 +151,7 @@ router.post('/user-login', function (req, res) {
         var userObj = {};
         userObj.ident = user._id;
         userObj.name = user.username;
+        userObj.avatar = user.avatar
         res.json(userObj);
       }
       else {
