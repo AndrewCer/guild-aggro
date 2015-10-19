@@ -59,31 +59,28 @@
                                    <i class="fa fa-times-circle-o x-mark" style="font-size: 1.3em;" ng-show='domainUnAvailable'> Domain Unavailable</i>
                                    <h4>Domain</h4>
                                    <p class="text-muted">Example: www.guildaggro.com/awesome-guild-name</p>
-                                   <input autofocus ng-blur='checkDb("domain")' ng-change='instaValidation(userHandle, "User name")' type="text" class="form-control" ng-class="{'fill-red': domainUnAvailable, 'fill-green': domainAvailable}"  placeholder="awesome-guild-name" id="domain-name" ng-model='domainName'>
+                                   <input autofocus ng-blur='checkDb()' ng-change='instaValidation(domainName, "domain")' type="text" class="form-control" ng-class="{'fill-red': domainUnAvailable, 'fill-green': domainAvailable}"  placeholder="awesome-guild-name" id="domain-name" ng-model='domainName'>
                                    <p ng-repeat='error in handleError' class="help-block text-danger">{{error}}</p>
                                  </div>
                                  <div class="form-group">
                                    <!-- <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='emailAvailable'> Email Available</i> -->
                                    <!-- <i class="fa fa-times-circle-o x-mark" style="font-size: 1.3em;" ng-show='emailUnAvailable'> Email Unavailable</i> -->
                                   <h4>Guild Name</h4>
-                                   <input ng-blur='checkDb("email")' ng-change='instaValidation(email, "Email")' type="text" class="form-control" ng-class="{'fill-red': emailUnAvailable, 'fill-green': emailAvailable}"  placeholder="e.g. Method" id="email" ng-model='email'>
+                                   <input ng-change='instaValidation(guildName, "guild")' type="text" class="form-control" ng-class="{'fill-red': emailUnAvailable, 'fill-green': emailAvailable}"  placeholder="e.g. Method" id="guild-name" ng-model='guildName'>
                                    <p ng-repeat='error in emailError' class="help-block text-danger">{{error}}</p>
                                  </div>
-                                 <div class="form-group">
+                                 <!-- <div class="form-group">
                                    <h4>Game</h4>
-                                   <!-- <input ng-change='samenessCheck(email, emailConfirm, "email")' type="text" class="form-control" ng-class="{'fill-red': emailUnAvailable, 'fill-red': emailNonMatch, 'fill-green': emailPass}" placeholder="Dropdown input here" id="email-confirm" ng-model='emailConfirm'> -->
-                                   <!-- <p class="help-block text-danger">{{emailConfirmError}}</p> -->
                                    <input ng-click='showGames = !showGames' ng-hide='showGames' type="text" class="form-control change-mouse" value='{{selectedGame || tempSeedGameData[0]}}'>
                                    <div ng-show='showGames' >
                                     <input ng-click='showGames = !showGames' type="text" class="form-control change-mouse" value='{{selectedGame || tempSeedGameData[0]}}'>
                                     <ul class="games-input-sim">
                                       <input type="text" ng-model='search'>
-                                      <!-- <li class="init">{{tempSeedGameData[0]}}</li> -->
                                       <li class="change-mouse" ng-repeat='game in tempSeedGameData | filter:search' ng-click='chooseGame(game)'>{{game}}</li>
                                     </ul>
                                    </div>
-                                  </div>
-                                 <div class="form-group">
+                                  </div> -->
+                                 <!-- <div class="form-group">
                                    <h4>Faction</h4>
                                    <p>(display when it applies...hide if game selected doesn't have factions)</p>
                                    <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='passLength'>Long Passwords are Strong Passwords ({{password.length}}/30)</i>
@@ -95,21 +92,20 @@
                                    <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='passConfirmPassed'>Passwords Match</i>
                                    <input ng-change='samenessCheck(password, passwordConfirm, "password")' type="password" class="form-control" ng-class="{'fill-red': passConfirmError, 'fill-green': passConfirmPassed}" placeholder="Server" ng-model='passwordConfirm' id="password-confirm">
                                    <p class="help-block text-danger">{{passwordConfirmError}}</p>
-                                 </div>
+                                 </div> -->
                                  <div class="form-group">
                                    <h4>Site Template</h4>
-                                   <div class="form-group">
-                                     <select class="form-control">
+                                     <!-- <select class="form-control">
                                        <option>Template 1 (Fire Red)</option>
                                        <option>Template 2 (Leaf Green)</option>
                                        <option>Template 3 (Blacky black black 'stealth mode')</option>
-                                     </select>
-                                   </div>
-                                   <img src="$" alt="Template image here" />
+                                     </select> -->
+                                     <!-- TODO: add ng-click/model that will select this as a template and highlight it blue -->
+                                   <img ng-click='selectTempalte("blue")' ng-class='class' class='col-md-5 arthas-thumb' src="/images/blue-temp.png" alt="arthas">
                                  </div>
                                </div>
                                <div class="clearfix"></div>
-                             <div class="col-md-8">
+                             <div class="col-md-8 pushup">
                                <button type="submit" ng-show='allPass' class="btn btn-xl">Create Guild</button>
                                <button type="button" ng-hide='allPass' class="btn btn-xl disabled">Create Guild</button>
                              </div>

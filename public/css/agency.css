@@ -1210,6 +1210,14 @@ body {
   font-size: 11px;
 }
 
+.pushup {
+  margin-top: 10px;
+}
+
+.picked {
+  border-bottom: 5px solid red;
+  width: 300px;
+}
 
 /* box shadow version */
 /*@-webkit-keyframes pulsate {

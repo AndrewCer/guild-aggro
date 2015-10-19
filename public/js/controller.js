@@ -202,6 +202,27 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
 }])
 
 app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', '$timeout', 'UserStore', function ($scope, $window, $location, $http, $timeout, UserStore) {
+  $scope.checkDb = function () {
+
+  }
+  $scope.instaValidation = function (input, spot) {
+    if (spot === 'domain') {
+
+    }
+    if (spot === 'guild') {
+
+    }
+  }
+  $scope.selectTempalte = function (template) {
+    if($scope.class === 'picked') {
+      $scope.class = ''
+      $scope.template = null;
+    }
+    else {
+      $scope.class = 'picked';
+      $scope.template = template;
+    }
+  }
   // NOTE: get user id
   // console.log(UserStore.user[0].ident);
   // NOTE: get user name
