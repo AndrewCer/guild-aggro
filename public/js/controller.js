@@ -201,6 +201,24 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
   }
 }])
 
+app.controller('LoginController', ['$scope', '$http', '$location', '$cookies', 'UserStore', function ($scope, $http, $location, $cookies, UserStore) {
+  $scope.allPass = true;
+  $scope.userLogin = function () {
+    $http.post('api/user-login', { userN: $scope.userHandle, userP: $scope.password })
+    .then(function (response) {
+      if (response.data.error) {
+        $scope.loginError = true;
+      }
+      else {
+        $scope.loginError = false;
+        $cookies.put('user', response.data.ident);
+        UserStore.userInfo(response.data);
+        $location.path('/guild/method');
+      }
+    });
+  }
+}])
+
 app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', '$timeout', 'UserStore', function ($scope, $window, $location, $http, $timeout, UserStore) {
   // console.log(UserStore.user);
   var userInfo = UserStore.user
@@ -417,13 +435,23 @@ app.controller('BlueController', ['$scope', '$http', '$interval', function ($sco
 }])
 
 app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location', 'UserStore', '$cookies', function ($scope, $http, $routeParams, $location, UserStore, $cookies) {
+  var userIdent = $cookies.get('user');
   var getUserInfo = function () {
-    var userIdent = $cookies.get('user');
     if (userIdent != undefined) {
       $http.post('api/user-check', { userIdent: userIdent})
       .then(function (response) {
+        $scope.showUserInfo = true;
+        $scope.showLogin = false;
         $scope.userName = response.data.name.capitalize();
-      });  
+        var userStoreObj = {};
+        userStoreObj.ident = userIdent;
+        userStoreObj.name = response.data.name;
+        UserStore.userInfo(userStoreObj);
+      });
+    }
+    if ($scope.userName === undefined) {
+      $scope.showUserInfo = false;
+      $scope.showLogin = true;
     }
   }
   getUserInfo();
@@ -431,7 +459,11 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
   $http.post('api/get-guild', {gDomain: routeParam})
   .then(function (response) {
     if (response.data) {
-      console.log(response.data);
+      //check if guild page status is set to priavte or public
+      if (response.data.privacyStatus === 'private') {
+      //check if user belongs to this guild if guild status is private
+
+      }
       $scope.leftColClass = 'col-md-3';
       $scope.midColClass = 'col-md-6';
       $scope.rightColClass = 'col-md-3';
@@ -450,11 +482,25 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
 
       //nav divs
       $scope.postContent = function () {
-        $scope.homeShow = false;
-        $scope.calendarShow = false;
-        $scope.previewShow = false;
-        $scope.forumShow = false;
-        $scope.addContentShow = true;
+        //check if current logged in user can access this content
+        if (userIdent == $scope.guildInfo.guildMaster[0].ident) {
+          $scope.homeShow = false;
+          $scope.calendarShow = false;
+          $scope.previewShow = false;
+          $scope.forumShow = false;
+          $scope.addContentShow = true;
+        }
+        else {
+          for (var i = 0; i < $scope.guildInfo.guildMaster.length; i++) {
+            if (userIdent == $scope.guildInfo.guildMember[i].ident) {
+              $scope.homeShow = false;
+              $scope.calendarShow = false;
+              $scope.previewShow = false;
+              $scope.forumShow = false;
+              $scope.addContentShow = true;
+            }
+          }
+        }
       }
       $scope.showHome = function () {
         $scope.addContentShow = false;
@@ -488,8 +534,7 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
         $scope.homeShow = true;
         $scope.previewShow = false;
         $scope.addContentShow = false;
-        //make api call to insert posts here
-        $http.post('api/guild-post', {guild: routeParam, postTitle: $scope.pTitle, postBody: $scope.pMessage})
+        $http.post('api/guild-post', {guild: routeParam, postTitle: $scope.pTitle, postBody: $scope.pMessage, userInfo: UserStore.user })
         .then(function (result) {
           //after db is loaded do page refresh??
           $scope.pTitle = null;
@@ -497,7 +542,7 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
         });
 
       }
-
+      //all other page load stuff here
     }
     else {
       console.log('guild not found');

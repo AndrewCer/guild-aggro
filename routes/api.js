@@ -7,13 +7,6 @@ var guilds = db.get('guilds');
 var validateSignUp = require('../lib/validations.js');
 var bcrypt = require('bcrypt');
 
-// NOTE: rough guilds collection schema
-// guilds {
-//   this.domain:
-//   this.gName:
-//   this.
-// }
-
 router.post('/check-db', function (req, res) {
   // TODO: can also use this to check if guilds are available!
   var toCheck = req.body.toCheck.input.toLowerCase();
@@ -77,7 +70,7 @@ router.post('/auth', function (req, res) {
         else {
         //nothing went wrong insert away
         bcrypt.hash(password, 8, function(err, hash) {
-          users.insert({ username: userName, email: email, password: hash })
+          users.insert({ username: userName, email: email, password: hash, guild: [], avatar: 'http://vignette3.wikia.nocookie.net/wowwiki/images/6/68/WoW_Lich_King_Arthas.png/revision/latest?cb=20100221131133' })
           .then(function (user) {
             //return user id for later queries and cookies
             var userObj = {}
@@ -98,7 +91,7 @@ router.post('/guild-check', function (req, res) {
   var guildTempalte = req.body.gTemplate;
   var guildBackground = req.body.gBackground;
   var guildMaster = req.body.gMaster;
-  guilds.insert({ domain: guildDomain, name: guildName, template: guildTempalte, backgroundIm: guildBackground, guildMaster: guildMaster, guildAdmin:[], guildMember:[], posts: []})
+  guilds.insert({ domain: guildDomain, name: guildName, template: guildTempalte, backgroundIm: guildBackground, guildMaster: guildMaster, guildAdmin:[], guildMember:[], posts: [], memberRequests: [], privacyStatus: 'public'})
   .then(function (guild) {
     res.json(guild)
   })
@@ -123,8 +116,9 @@ router.post('/guild-post', function (req, res) {
   var title = req.body.postTitle;
   var body = req.body.postBody;
   var guildDomain = req.body.guild;
+  var postedBy = req.body.userInfo;
   var postedDate = new Date();
-  guilds.update({ domain: guildDomain }, { $push: {posts: {$each: [{title: title, body: body, user: 'fill-with-user-info-object', date: postedDate}], $position: 0}}})
+  guilds.update({ domain: guildDomain }, { $push: {posts: {$each: [{title: title, body: body, postedBy: postedBy, date: postedDate}], $position: 0}}})
   .then(function (guild) {
     res.json(true)
   })
@@ -136,6 +130,29 @@ router.post('/user-check', function (req, res) {
   .then(function (user) {
     res.json({name: user.username});
   })
+});
+
+router.post('/user-login', function (req, res) {
+  var userName = req.body.userN;
+  var userPassword = req.body.userP;
+  users.findOne({ username: userName })
+  .then(function (user) {
+    if (user === undefined) {
+      //user not found
+      res.json({ error: true });
+    }
+    else {
+      if(bcrypt.compareSync(userPassword, user.password)) {
+        var userObj = {};
+        userObj.ident = user._id;
+        userObj.name = user.username;
+        res.json(userObj);
+      }
+      else {
+        res.json({ error: true })
+      }
+    }
+  });
 });
 
 module.exports = router;
