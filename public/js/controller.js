@@ -202,16 +202,15 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
 }])
 
 app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', '$timeout', 'UserStore', function ($scope, $window, $location, $http, $timeout, UserStore) {
+  //temp
+  $scope.allPass = true;
   $scope.checkDb = function () {
 
   }
   $scope.instaValidation = function (input, spot) {
-    if (spot === 'domain') {
-
-    }
-    if (spot === 'guild') {
-
-    }
+    var domainPassing = null;
+    var guildPassing = null;
+    // TODO: add validation here
   }
   $scope.selectTempalte = function (template) {
     if($scope.class === 'picked') {
@@ -223,24 +222,36 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
       $scope.template = template;
     }
   }
+  $scope.guildCreation = function () {
+    if ($scope.allPass) {
+      var gDomain = $scope.domainName;
+      var gName = $scope.guildName;
+      var gTemplate = $scope.template;
+      var gBackground = $scope.guildBackground;
+      $http.post('api/guild-check', {gDomain: gDomain, gName: gName, gTemplate: gTemplate, gBackground: gBackground})
+      .then(function (response) {
+        console.log(response.data);
+      });
+    }
+  }
   // NOTE: get user id
   // console.log(UserStore.user[0].ident);
   // NOTE: get user name
   // console.log(UserStore.user[0].name);
   // $scope.userName = UserStore.user[0].name.capitalize();
   /// NOTE: used for building page template
-  $scope.userName = 'andrew'.capitalize();
+  // $scope.userName = 'andrew'.capitalize();
   // TODO: get this to fire off when view loads, rather than when the initial app loads
   // $scope.startFade = true;
   // $timeout(function(){
   //     $scope.hidden = true;
   // }, 9000);
   // NOTE: temp fix until above is solved
-  $scope.tempSeedGameData = ['World of Warcraft', 'Aion', 'Final Fantasy', 'Age of Conan', 'Eve']
+  // $scope.tempSeedGameData = ['World of Warcraft', 'Aion', 'Final Fantasy', 'Age of Conan', 'Eve']
   // $scope.selectedGame = null;
-  $scope.chooseGame = function (game) {
-    $scope.selectedGame = game
-  }
+  // $scope.chooseGame = function (game) {
+  //   $scope.selectedGame = game
+  // }
   $scope.hideBox = function () {
       $scope.startFade = true;
       $timeout(function(){
@@ -396,4 +407,28 @@ app.controller('BlueController', ['$scope', '$http', '$interval', function ($sco
   if ($scope.guildInfo.status === 'Online') {
     $scope.guildInfo.serverStatus = '/images/status-icons/up.gif';
   }
+}])
+
+app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location', function ($scope, $http, $routeParams, $location) {
+  var routeParam = $routeParams.gDomain;
+  $http.post('api/get-guild', {gDomain: routeParam})
+  .then(function (response) {
+    if (response.data) {
+      $scope.leftColClass = 'col-md-3';
+      $scope.midColClass = 'col-md-6';
+      $scope.rightColClass = 'col-md-3';
+      $scope.homeShow = true;
+
+      //set page
+      $scope.backgroundIm = response.data.backgroundIm;
+      if ($scope.backgroundIm === undefined) {
+        $scope.backgroundIm = 'http://www.damnwallpapers.com/wp-content/uploads/2013/07/lich-king-arthas-1080x1920.jpg';
+      }
+      $scope.guildName = response.data.name.capitalize();
+    }
+    else {
+      console.log('guild not found');
+      $location.path('/');
+    }
+  })
 }])

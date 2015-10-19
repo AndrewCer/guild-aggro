@@ -18,6 +18,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       templateUrl: 'partials/blue-temp.html',
       controller: 'BlueController'
     })
+    .when('/guild/:gDomain', {
+      templateUrl: 'partials/guild-page.html',
+      controller: 'GuildController'
+    })
     .when('/temp-guild-creation', {
       templateUrl: 'partials/temp-guild-creation.html',
       controller: 'GuildCreationController'

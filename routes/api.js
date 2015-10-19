@@ -3,6 +3,7 @@ var router = express.Router();
 // var db = require('monk')(process.env.MONGOLAB_URI);
 var db = require('monk')("localhost/guildaggro");
 var users = db.get('users');
+var guilds = db.get('guilds');
 var validateSignUp = require('../lib/validations.js');
 var bcrypt = require('bcrypt');
 
@@ -39,7 +40,7 @@ router.post('/check-db', function (req, res) {
       }
     })
   }
-})
+});
 
 router.post('/auth', function (req, res) {
   var userName = req.body.userName.toLowerCase();
@@ -89,7 +90,32 @@ router.post('/auth', function (req, res) {
       })
     })
   }
-})
+});
 
+router.post('/guild-check', function (req, res) {
+  var guildDomain = req.body.gDomain;
+  var guildName = req.body.gName;
+  var guildTempalte = req.body.gTemplate;
+  var guildBackground = req.body.gBackground
+  guilds.insert({ domain: guildDomain, name: guildName, template: guildTempalte, backgroundIm: guildBackground})
+  .then(function (guild) {
+    res.json(guild)
+  })
+});
+
+router.post('/get-guild', function (req, res) {
+  // console.log(req.body.gDomain);
+  guilds.findOne({ domain: req.body.gDomain })
+  .then(function (guild) {
+    if (guild === undefined) {
+      // console.log('didnt find');
+      res.json(false)
+    }
+    else {
+      // console.log('found it');
+      res.json(guild)
+    }
+  })
+});
 
 module.exports = router;

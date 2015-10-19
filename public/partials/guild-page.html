@@ -1,0 +1,206 @@
+<!-- TODO: transition inline styles to stylesheet -->
+<div>
+  <!-- <div class="nabar" style="color: gray;">
+    <ul class="user-nav pull-right">
+      <li>Add dropdown here</li>
+      <li>Guild Name</li>
+      <li>Admin</li>
+      <li>User</li>
+    </ul>
+  </div> -->
+  <div class="wrapper" style="background-color:black">
+    <div class="container">
+      <div class="col-lg-12 arthas-blue">
+        <div class="banner">
+          <h2 class="banner-text">{{guildName}}</h2>
+          <img class='banner-img' ng-src="{{backgroundIm}}" alt="arthas" />
+        </div>
+        <div class="arthas-navbar block arthas" style="background-image: url('http://www.htcinc.net/media/layout/navbar-bg.png');">
+          <ul class="text-center">
+            <li ng-click='showHome()'>Home</li>
+            <li ng-click='showForum()'>Forums</li>
+            <li ng-click='showCalendar()'>Calendar</li>
+            <li ng-click='postContent()'>Post</li>
+          </ul>
+        </div>
+        <div id="left-column" class="{{leftColClass}}">
+          <div class="side-block block recruitment">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Recruitment
+              </div>
+            </div>
+            <div class="block-content">
+              <p>Availability:</p>
+              <div class="display-classes" ng-repeat='job in recruitment'>
+                <img src="{{job.image}}" alt="{{job.alt}}"/><p>{{job.type}}</p>
+                <p class="text-muted pull-right">{{job.status}}</p>
+              </div>
+            </div>
+            <div class="block-footer">
+              <!-- <p>Apply</p> -->
+              <button type="button" class="btn tinny-button">Apply</button>
+            </div>
+          </div>
+          <div class="side-block block pole">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Poll
+              </div>
+            </div>
+            <div class="block-content">
+              This will show a poles results: bla bla bla bla bla bla
+            </div>
+            <div class="block-footer">
+
+            </div>
+          </div>
+        </div>
+        <div id="middle-column" class="{{midColClass}}">
+          <div class="main-block block"  ng-show='homeShow'>
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                News
+              </div>
+            </div>
+            <!-- <div class="block-content" ng-show='postedTitle'> -->
+            <div class="block-content" ng-repeat='post in posts'>
+              <!-- TODO: ng-repeat for the first 5 posts in db -->
+              <img class="poster-avatar mini-avatar" src="{{post.avatar}}" alt="avatar"/>
+              <h1 class="post-title">{{post.title}}</h1>
+              <p class="text-muted post-info">By <a href='#'>{{post.poster}}</a> on {{post.date | date:'MMMM dd, yyyy'}}</p>
+              <p class="post-message">{{post.message}}</p>
+              <a class="col-md-offset-11 edit-post" ng-click='editPost'>Edit</a>
+              <!-- TODO: add seperator in here -->
+              <!-- ng-repeat here for "blog post" type content -->
+            </div>
+            <div class="block-footer">
+              <!-- TODO: generate more posts -->
+              <a href="#" class="col-md-offset-11">More</a>
+            </div>
+          </div>
+          <div class="main-add-block block"  ng-show='addContentShow'>
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Add Content
+              </div>
+            </div>
+            <div class="block-content">
+              <form ng-submit='contentPost()'>
+                <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input type="text" autofocus class="form-control" id="subject" ng-model='pTitle' value="pTitle">
+                </div>
+                <div class="form-group">
+                  <label for="posting">Entry:</label>
+                  <textarea class="form-control" id='post-textarea' placeholder="Post message" ng-model='pMessage' value='pMessage'></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="block-footer">
+              <button type="button" class="btn btn-default" ng-click='contentPost()'>Post</button>
+              <button type="button" class="btn btn-default" ng-click='showPreview()'>Preview</button>
+            </div>
+          </div>
+          <div class="main-preview-block block"  ng-show='previewShow'>
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Preview
+              </div>
+            </div>
+            <div class="block-content">
+              <img class="poster-avatar mini-avatar" src="http://vignette3.wikia.nocookie.net/wowwiki/images/6/68/WoW_Lich_King_Arthas.png/revision/latest?cb=20100221131133" alt="avatar"/>
+              <h1 class="post-title">{{pTitle}}</h1>
+              <p class="text-muted post-info">By <a href='#'>Member</a> on {{previewNewDate | date:'MMMM dd, yyyy'}}</p>
+              <p class="post-message">{{pMessage}}</p>
+            </div>
+            <div class="block-footer">
+              <button type="button" class="btn btn-default" ng-click='contentPost()'>Post</button>
+              <button type="button" class="btn btn-default" ng-click='postContent()'>Edit</button>
+            </div>
+          </div>
+          <div class="main-calendar-block block"  ng-show='calendarShow'>
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Calendar
+              </div>
+            </div>
+            <div class="block-content">
+
+            </div>
+            <div class="block-footer">
+
+            </div>
+          </div>
+          <div class="main-forum-block block"  ng-show='forumShow'>
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Forums
+              </div>
+            </div>
+            <div class="block-content">
+
+            </div>
+            <div class="block-footer">
+
+            </div>
+          </div>
+        </div>
+        <div id="right-column" class="{{rightColClass}}">
+          <div class="side-block block time-zone">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Time Zone
+              </div>
+            </div>
+            <div class="block-content">
+              <div class="time-zone-time">{{dateValue | date:'shortTime'}}</div>
+              <div class="time-zone-date">
+                <div class="tz-date">{{dateValue | date:'MMM dd'}}</div>
+                <div class="tz-zone">MT</div>
+              </div>
+
+            </div>
+            <div class="block-footer">
+
+            </div>
+          </div>
+          <div class="side-block block server-status">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Server Status
+              </div>
+            </div>
+            <div class="block-content text-center">
+              <h4>{{guildInfo.server}}</h4>
+              <img class="status-icon" src="{{guildInfo.serverStatus}}" alt="up or down arrow"/>
+              <p>{{guildInfo.status}}</p>
+            </div>
+            <div class="block-footer">
+
+            </div>
+          </div>
+          <div class="side-block block calendar">
+            <div class="block-header arthas">
+              <div class="block-head-txt">
+                Calendar
+              </div>
+            </div>
+            <div class="block-content">
+              This will show a mini calendar widget
+            </div>
+            <div class="block-footer">
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="arthas-footer text-center">
+            <p>Created by Mr. T</p>
+            <p>Other closing stuff</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
