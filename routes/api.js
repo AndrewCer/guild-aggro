@@ -113,6 +113,19 @@ router.post('/get-guild', function (req, res) {
   })
 });
 
+router.post('/domain-check', function (req, res) {
+  var toCheck = req.body.domain;
+  guilds.findOne({ domain: toCheck })
+  .then(function (guild) {
+    if (guild === null) {
+      res.json(false);
+    }
+    else {
+      res.json(true);
+    }
+  })
+});
+
 router.post('/guild-post', function (req, res) {
   var title = req.body.postTitle;
   var body = req.body.postBody;

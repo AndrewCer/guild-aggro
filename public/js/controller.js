@@ -220,17 +220,43 @@ app.controller('LoginController', ['$scope', '$http', '$location', '$cookies', '
 }])
 
 app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', '$timeout', 'UserStore', function ($scope, $window, $location, $http, $timeout, UserStore) {
-  // console.log(UserStore.user);
+  // TODO: redirect if there is no user info
   var userInfo = UserStore.user
+  var domainPassing = null;
+  var guildPassing = null;
   //temp
   $scope.allPass = true;
   $scope.checkDb = function () {
 
   }
   $scope.instaValidation = function (input, spot) {
-    var domainPassing = null;
-    var guildPassing = null;
-    // TODO: add validation here
+    if (spot === 'guild') {
+      if ($scope.guildName.length > 2) {
+        $scope.guildError = null;
+        guildPassing = true;
+      }
+      else {
+        guildPassing = false;
+        $scope.guildError = 'Guild name is too short. Must be more than 2 characters';
+      }
+    }
+  }
+  $scope.checkDb = function () {
+    if ($scope.domainName) {
+      $http.post('api/domain-check', {domain: $scope.domainName})
+      .then(function (response) {
+        if (response.data === false) {
+          domainPassing = true;
+          $scope.domainUnAvailable = false;
+          $scope.domainAvailable = true;
+        }
+        else {
+          domainPassing = false;
+          $scope.domainAvailable = false;
+          $scope.domainUnAvailable = true;
+        }
+      });
+    }
   }
   $scope.selectTempalte = function (template) {
     if($scope.class === 'picked') {
@@ -243,20 +269,28 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
     }
   }
   $scope.guildCreation = function () {
-    if ($scope.allPass) {
-      var gDomain = $scope.domainName;
-      var gName = $scope.guildName;
-      var gTemplate = $scope.template;
-      var gBackground = $scope.guildBackground;
-      $http.post('api/guild-check', {gDomain: gDomain, gName: gName, gTemplate: gTemplate, gBackground: gBackground, gMaster: userInfo})
-      .then(function (response) {
-        if (response.data) {
-          $location.path('/guild/' + response.data.domain);
-        }
-        else {
-          console.log('something went wrong');
-        }
-      });
+    if (domainPassing === null) {
+      $scope.domainError = 'You must enter a domain';
+    }
+    if (guildPassing === null) {
+      $scope.guildError = 'You must enter a guild name';
+    }
+    if (guildPassing === true && domainPassing === true) {
+      if ($scope.allPass) {
+        var gDomain = $scope.domainName;
+        var gName = $scope.guildName;
+        var gTemplate = $scope.template;
+        var gBackground = $scope.guildBackground;
+        $http.post('api/guild-check', {gDomain: gDomain, gName: gName, gTemplate: gTemplate, gBackground: gBackground, gMaster: userInfo})
+        .then(function (response) {
+          if (response.data) {
+            $location.path('/guild/' + response.data.domain);
+          }
+          else {
+            console.log('something went wrong');
+          }
+        });
+      }
     }
   }
   // NOTE: get user id
@@ -277,13 +311,12 @@ app.controller('GuildCreationController', ['$scope', '$window', '$location', '$h
   // $scope.chooseGame = function (game) {
   //   $scope.selectedGame = game
   // }
-  $scope.hideBox = function () {
-      $scope.startFade = true;
-      $timeout(function(){
-          $scope.hidden = true;
-      }, 1000);
-  };
-
+  // $scope.hideBox = function () {
+  //     $scope.startFade = true;
+  //     $timeout(function(){
+  //         $scope.hidden = true;
+  //     }, 1000);
+  // };
 }])
 
 

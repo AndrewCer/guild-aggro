@@ -55,19 +55,19 @@
                            <div class="row">
                                <div class="col-md-8">
                                  <div class="form-group">
-                                   <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='domainAvailable'> Domain Available</i>
-                                   <i class="fa fa-times-circle-o x-mark" style="font-size: 1.3em;" ng-show='domainUnAvailable'> Domain Unavailable</i>
                                    <h4>Domain</h4>
                                    <p class="text-muted">Example: www.guildaggro.com/awesome-guild-name</p>
+                                   <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='domainAvailable'> Domain Available</i>
+                                   <i class="fa fa-times-circle-o x-mark" style="font-size: 1.3em;" ng-show='domainUnAvailable'> Domain Unavailable</i>
                                    <input autofocus ng-blur='checkDb()' ng-change='instaValidation(domainName, "domain")' type="text" class="form-control" ng-class="{'fill-red': domainUnAvailable, 'fill-green': domainAvailable}"  placeholder="awesome-guild-name" id="domain-name" ng-model='domainName'>
-                                   <p ng-repeat='error in handleError' class="help-block text-danger">{{error}}</p>
+                                   <p class="help-block text-danger">{{domainError}}</p>
                                  </div>
                                  <div class="form-group">
                                    <!-- <i class="fa fa-check-circle-o check-mark" style="font-size: 1.3em;" ng-show='emailAvailable'> Email Available</i> -->
                                    <!-- <i class="fa fa-times-circle-o x-mark" style="font-size: 1.3em;" ng-show='emailUnAvailable'> Email Unavailable</i> -->
                                   <h4>Guild Name</h4>
-                                   <input ng-change='instaValidation(guildName, "guild")' type="text" class="form-control" ng-class="{'fill-red': emailUnAvailable, 'fill-green': emailAvailable}"  placeholder="e.g. Method" id="guild-name" ng-model='guildName'>
-                                   <p ng-repeat='error in emailError' class="help-block text-danger">{{error}}</p>
+                                   <input ng-change='instaValidation(guildName, "guild")' type="text" class="form-control" ng-class="{'fill-red': gNameFail, 'fill-green': gNamePass}"  placeholder="e.g. Method" id="guild-name" ng-model='guildName'>
+                                   <p class="help-block text-danger">{{guildError}}</p>
                                  </div>
                                  <!-- <div class="form-group">
                                    <h4>Game</h4>
