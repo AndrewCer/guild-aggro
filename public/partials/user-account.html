@@ -1,323 +1,119 @@
-user account stuff
-{{userName}}
-<div ng-controller='SplashController'>
-  <!-- Navigation -->
-  <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header page-scroll">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand page-scroll" href="#page-top">Guild Aggro</a>
-          </div>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                  <li class="hidden">
-                      <a href="#page-top"></a>
-                  </li>
-                  <li>
-                      <a href="/">Home</a>
-                  </li>
-                  <li>
-                      <a href='#' ng-click='logOut()'>Logout</a>
-                  </li>
-                  <!-- TODO: get this dropdown to work and take users to partials specific to their needs, i.e. all themes and such -->
-                  <!-- <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TL:DR<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li class="dropdown-header">Nav header</li>
-                      <li><a href="#">Separated link</a></li>
-                      <li><a href="#">One more separated link</a></li>
-                    </ul>
-                  </li> -->
-              </ul>
-          </div>
-          <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
-  </nav>
-  <!-- Header -->
-  <header>
-      <div class="container">
-          <div class="intro-text">
-              <div class="intro-lead-in">Angry Guild Hosting</div>
-              <div class="intro-heading">Guild <span class="color-red">Aggro</span></div>
-              <a href="#services" class="page-scroll btn btn-xl">Moar Dots</a>
-          </div>
-      </div>
-  </header>
-
-  <!-- *****testing here******** -->
-  <!-- <div class="container">
+<nav class="navbar navbar-default navbar-fixed-top non-splash">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand change-mouse" href='#page-top'>Account Management</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a ng-click='logOut()' href="#">Logout</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+<div class="container push-top">
+  <div class="tab-block">
+    <div ng-click='selectUserTab()' class="single-tab" ng-class='dynamicUserClass'>
+      <h4 class="user-tab">User Tab</h4>
+    </div>
+    <div ng-click='selectGuildTab()' class="single-tab" ng-class='dynamicGuildClass'>
+      <h4 class="guild-tab">Guild Tab</h4>
+    </div>
+  </div>
+  <div class="container col-md-8 guild-signup" ng-show='showUserSection'>
     <div class="row">
-      <div class="login-fade-bar" ng-hide="hidden" ng-class="{fade: startFade}">
-        Thank you {{userName}} you've been signed in
-        <span><i id="fade-bar-x" class="fa fa-times pull-right" ng-click='hideBox()'></i></span>
+      <div class="container col-md-12">
+        <h2>Guild <span class="color-red">Aggro</span> Account Management</h2>
+      </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-11">
+                    <h4>User Name: </h4>
+                    <p>{{userName}}</p>
+                    <h4>Avatar: </h4>
+                    <img src="{{userAvatar}}" style='width:100px; height:100px;' alt="avatar" />
+                    <button ng-click='editAvatar()' ng-show='showEdit' type="button" class="btn btn-xl edit-button">Edit</button>
+                </div>
+                <div class="col-lg-5" style="margin-top: 20px;">
+                  <button ng-click='saveAvatar()' ng-show='showSave' type="button" class="btn btn-xl edit-button">Save</button>
+                  <button ng-click='cancelAvatar()' ng-show='showCancel' type="button" class="btn btn-xl edit-button">Cancel</button>
+                  <input style="margin-top: 20px;" ng-model='newAvatarUrl' class="form-control"  ng-show='showSave' type="text" placeholder="New URL">
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="container col-md-8 guild-signup" ng-show='showGuildSection'>
+    <div class="row">
+      <div class="container col-md-12">
+        <h2>Guild Management</h2>
+      </div>
+        <div class="container">
+            <div class="row">
+                  <!-- if in guild and not guild master-->
+                <div class="col-lg-11">
+                    <h4>Your Guild:</h4>
+                    <p>Name</p>
+                    <p>URL:</p>
+                </div>
+                  <!-- if in guild and guild master-->
+                <div class="col-lg-11">
+                    <h4>Your Guild:</h4>
+                    <p>Name</p>
+                    <p>URL:</p>
+                    <h2>Edit Guild Page Section</h2>
+                    <p>Change Name</p>
+                    <p>Change background image</p>
+                    <p>Manage members</p>
+                    <p>Applied memebers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- TODO: hide this section on mobile view -->
+  <div class="container col-md-4 account-manage-highlights">
+      <h4>Info</h4>
+    <div class="container">
+      <div class="row">
+        <p><b>Manage Account Information</b></p>
+        <div class="col-md-4">
+          <p>At this time, only avatar images may be changed</p>
+        </div>
+      </div>
+      <div class="row">
+        <p><b>Manage Guild Information</b></p>
+        <div class="col-md-4">
+          <p>If you're in a guild, you can see and access it from here</p>
+          <p>If you're a guild master, you can manage it from here</p>
+        </div>
       </div>
     </div>
-  </div> -->
-  <!-- *****testing here******** -->
-
-  <!-- Services Section -->
-  <section id="services">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-12 text-center">
-                  <h2 class="section-heading">About</h2>
-                  <h3>NOTE: Add more info on what this actually is</h3>
-                  <h3 class="section-subheading text-muted">You create it, we save it.</h3>
-              </div>
-          </div>
-          <div class="row text-center">
-              <div class="col-md-4">
-                <!-- add image peon with question mark over head here -->
-                  <span class="fa-stack fa-4x">
-                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                      <i class="fa fa-clock-o fa-stack-1x fa-inverse"></i>
-                  </span>
-                  <h4 class="service-heading">5 minute Setup</h4>
-                  <p class="text-muted">Get your Guild's page up and running in minutes! It's so easy, even a peon could do it. Zug Zug!</p>
-              </div>
-              <!-- chat image here -->
-              <div class="col-md-4">
-                  <span class="fa-stack fa-4x">
-                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                      <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
-                  </span>
-                  <h4 class="service-heading">Guild Chat</h4>
-                  <p class="text-muted">Using our built in chat service, your guild will have a private, real time, internal chat app at your disposal.</p>
-              </div>
-              <!-- forum scroll here -->
-              <div class="col-md-4">
-                  <span class="fa-stack fa-4x">
-                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                      <i class="fa fa-database fa-stack-1x fa-inverse"></i>
-                  </span>
-                  <h4 class="service-heading">Guild Forums</h4>
-                  <p class="text-muted">As a premium member, gain access to your own personal guild forum. Let the theorycrafting and guild picture threads commence!</p>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <section id="try" class="bg-light-gray">
-      <div class="container text-center">
-          <div class="row">
-              <div class="col-lg-12 text-center">
-                  <h2 class="section-heading">Test a Theme</h2>
-                  <h3>NOTE: Show image of actual template for production</h3>
-                  <h3 class="section-subheading text-muted">Select the theme below</h3>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-md-6 col-md-offset-3 template-item">
-                  <!-- <a href="/signup" class="portfolio-link" data-toggle="modal"> -->
-                  <a href="/blue-template" class="template-link">
-                      <!-- <div class="template-hover">
-                          <div class="template-hover-content">
-                              <i class="fa fa-plus fa-3x"></i>
-                          </div>
-                      </div> -->
-                      <div class="img-responsive">
-                      </div>
-                      <img src="http://topwalls.net/wp-content/uploads/2012/02/Arthas-Menethil-the-Lich-King-wow.jpg" class="img-responsive" alt="arthas">
-                  <div class="portfolio-caption">
-                      <h4>Arthas</h4>
-                      <!-- <p class="text-muted">Click Here</p> -->
-                  </div>
-                  </a>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <!-- Portfolio Grid Section -->
-  <section id="portfolio">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-12 text-center">
-                  <h2 class="section-heading">Create</h2>
-                  <h3>NOTE: add pulsor effect over/around image to show users what to click</h3>
-                  <h3 class="section-subheading text-muted">Your own person guild site is just a few clicks away!</h3>
-                  <!-- <i class="fa fa-arrow-circle-down text-primary"></i> -->
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-md-12 col-sm-6 portfolio-item">
-                  <!-- <a href="/signup" class="portfolio-link" data-toggle="modal"> -->
-                  <a href="/signup" class="portfolio-link">
-                      <div class="portfolio-hover">
-                          <div class="portfolio-hover-content">
-                              <i class="fa fa-plus fa-3x"></i>
-                          </div>
-                      </div>
-                      <div class="img-responsive">
-                      </div>
-                      <img src="http://www.blogcdn.com/massively.joystiq.com/media/2012/01/wow4.jpg" class="img-responsive" alt="">
-                  <div class="portfolio-caption">
-                      <h4>Create Page</h4>
-                      <!-- <p class="text-muted">Click Here</p> -->
-                  </div>
-                  </a>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about"  class="bg-light-gray">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-12 text-center">
-                  <h2 class="section-heading">Guide</h2>
-                  <h3>NOTE: add images of the steps to each circle. See markup for where to put them</h3>
-                  <h3 class="section-subheading text-muted">Four Step Guild Creation System</h3>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-12">
-                  <ul class="timeline">
-                      <li>
-                          <div class="timeline-image">
-                              <!-- <img class="img-circle img-responsive" src="img/about/1.jpg" alt=""> -->
-                          </div>
-                          <div class="timeline-panel">
-                              <div class="timeline-heading">
-                                  <h4>Sign-up</h4>
-                                  <h4 class="subheading">Humble Beginnings</h4>
-                              </div>
-                              <div class="timeline-body">
-                                  <p class="text-muted">Add information about first creation step. Guild name, admin name, ect.</p>
-                              </div>
-                          </div>
-                      </li>
-                      <li class="timeline-inverted">
-                          <div class="timeline-image">
-                              <!-- <img class="img-circle img-responsive" src="img/about/2.jpg" alt=""> -->
-                          </div>
-                          <div class="timeline-panel">
-                              <div class="timeline-heading">
-                                  <h4>Template</h4>
-                                  <h4 class="subheading">A Site is Born</h4>
-                              </div>
-                              <div class="timeline-body">
-                                  <p class="text-muted">Add info about template selections.</p>
-                              </div>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="timeline-image">
-                              <!-- <img class="img-circle img-responsive" src="img/about/3.jpg" alt=""> -->
-                          </div>
-                          <div class="timeline-panel">
-                              <div class="timeline-heading">
-                                  <h4>Invite</h4>
-                                  <h4 class="subheading">Shadows Gather</h4>
-                              </div>
-                              <div class="timeline-body">
-                                  <p class="text-muted">Add info about sending invites to guild members or perhaps how guild memebers can apply and ask for permision to site</p>
-                              </div>
-                          </div>
-                      </li>
-                      <li class="timeline-inverted">
-                          <div class="timeline-image">
-                              <!-- <img class="img-circle img-responsive" src="img/about/4.jpg" alt=""> -->
-                          </div>
-                          <div class="timeline-panel">
-                              <div class="timeline-heading">
-                                  <h4>Communitcation</h4>
-                                  <h4 class="subheading">Connectivity at its Finest</h4>
-                              </div>
-                              <div class="timeline-body">
-                                  <p class="text-muted">Explain communication tools, chat app, raid invite emails, ect</p>
-                              </div>
-                          </div>
-                      </li>
-                      <li class="timeline-inverted">
-                          <div class="timeline-image">
-                              <h4>Go Forth
-                                  <br>and
-                                  <br><span class="color-red">Rage</span></h4>
-                          </div>
-                      </li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <!-- Team Section -->
-  <section id="team">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-12 text-center">
-                  <h2 class="section-heading">This Guy</h2>
-                  <h3 class="section-subheading text-muted">Site problems? Take it up with this guy.</h3>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-sm-4 col-sm-offset-4">
-                  <div class="team-member">
-                      <img src="http://ia.media-imdb.com/images/M/MV5BMTQ5Nzg2MTgwMl5BMl5BanBnXkFtZTcwNTA0NjcxMw@@._V1_UY317_CR0,0,214,317_AL_.jpg" class="img-responsive img-circle" alt="mr. T">
-                      <h4>Mr. T</h4>
-                      <p class="text-muted">Web Master</p>
-                      <ul class="list-inline social-buttons">
-                          <!-- <li><a href="#"><i class="fa fa-twitter"></i></a>
-                          </li>
-                          <li><a href="#"><i class="fa fa-facebook"></i></a>
-                          </li> -->
-                          <!-- <li><a href="https://www.linkedin.com/in/andrewcer"><i class="fa fa-linkedin"></i></a>
-                          </li> -->
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 text-center">
-                  <p class="large text-muted">I pitty the fool who disrepect my website!</p>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <footer  class="bg-light-gray">
-      <div class="container">
-          <div class="row">
-              <div class="col-md-4">
-                  <span class="copyright">&copy; Andrew Cer 2015</span>
-              </div>
-              <div class="col-md-4">
-                  <ul class="list-inline social-buttons">
-                      <!-- <li><a href="#"><i class="fa fa-twitter"></i></a>
-                      </li>
-                      <li><a href="#"><i class="fa fa-facebook"></i></a>
-                      </li> -->
-                      <li><a href="https://www.linkedin.com/in/andrewcer" target="_blank"><i class="fa fa-linkedin"></i></a>
-                      </li>
-                  </ul>
-              </div>
-              <div class="col-md-4">
-              </div>
-          </div>
-      </div>
-  </footer>
-  <!-- Plugin JavaScript -->
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-  <script src="js/classie.js"></script>
-  <script src="js/cbpAnimatedHeader.js"></script>
-  <!-- jQuery -->
-  <!-- <script src="js/jquery.js"></script> -->
-  <!-- Bootstrap Core JavaScript -->
-  <script src="js/bootstrap.min.js"></script>
-  <!-- Custom Theme JavaScript -->
-  <script src="js/agency.js"></script>
+  </div>
 </div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="copyright">&copy; Andrew Cer 2015</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <!-- <li><a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                    </li> -->
+                    <!-- <li><a href="https://www.linkedin.com/in/andrewcer" target="_blank"><i class="fa fa-linkedin"></i></a>
+                    </li> -->
+                </ul>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+</footer>

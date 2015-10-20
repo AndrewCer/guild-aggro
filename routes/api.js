@@ -98,7 +98,10 @@ router.post('/guild-check', function (req, res) {
   var postedDate = new Date();
   guilds.insert({ domain: guildDomain, name: guildName, template: guildTempalte, backgroundIm: guildBackground, guildMaster: guildMaster, guildAdmin:[], guildMember:[], posts: [{title: title, body: body, postedBy: postedBy, date: postedDate}], memberRequests: [], privacyStatus: 'public'})
   .then(function (guild) {
-    res.json(guild)
+    users.update({ _id: guildMaster[0].ident }, {$push: {guild: guild._id}})
+    .then(function () {
+      res.json(guild)
+    })
   })
 });
 
@@ -149,6 +152,7 @@ router.post('/user-check', function (req, res) {
     var userObj = {};
     userObj.ident = user._id;
     userObj.name = user.username;
+    userObj.guild = user.guild[0];
     userObj.avatar = user.avatar
     res.json(userObj);
   })
@@ -177,5 +181,15 @@ router.post('/user-login', function (req, res) {
     }
   });
 });
+
+router.post('/change-avatar', function (req, res) {
+  var newUrl = req.body.newUrl;
+  var userId = req.body.userId;
+  console.log(newUrl, userId);
+  users.update({ _id: userId }, { $set: {avatar: newUrl}})
+  .then(function (response) {
+
+  })
+})
 
 module.exports = router;

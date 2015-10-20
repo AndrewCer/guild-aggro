@@ -7,25 +7,23 @@ String.prototype.capitalize = function(){
 app.controller('MasterController', ['$scope', '$location', '$anchorScroll', '$window', '$cookies', function ($scope, $location, $anchorScroll, $window, $cookies) {
   $scope.logOut = function () {
     $cookies.remove("user");
-    $location.path('/');
+    $window.location = '/';
   }
   $scope.closeModal = function () {
     $location.path('/');
-    $location.hash('portfolio');
-    $anchorScroll();
+    // $location.hash('portfolio');
+    // $anchorScroll();
   }
   $scope.goHome = function () {
-    $window.location = '/'
+    $window.location = '/';
   }
 }])
 
-app.controller('SplashController', ['$scope', '$timeout', function ($scope, $timeout) {
-  // NOTE: testing here
-    // $scope.startFade = true;
-    // $timeout(function(){
-    //     $scope.hidden = true;
-    // }, 3000);
-  // NOTE: testing here
+app.controller('SplashController', ['$scope', '$timeout', '$location', '$cookies', '$window', function ($scope, $timeout, $location, $cookies, $window) {
+  if ($cookies.get('user')) {
+    // $window.location = 'account/' + $cookies.get('user');
+    $location.path('/account/' + $cookies.get('user'));
+  }
 }])
 
 app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', 'UserStore', 'dbCheck', '$cookies', function ($scope, $window, $location, $http, UserStore, dbCheck, $cookies) {
@@ -210,6 +208,7 @@ app.controller('LoginController', ['$scope', '$http', '$location', '$cookies', '
   $scope.userLogin = function () {
     $http.post('api/user-login', { userN: $scope.userHandle, userP: $scope.password })
     .then(function (response) {
+      console.log(response);
       if (response.data.error) {
         $scope.loginError = true;
       }
@@ -487,6 +486,7 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
       .then(function (response) {
         $scope.showUserInfo = true;
         $scope.showLogin = false;
+        $scope.userIdent = response.data.ident;
         $scope.userName = response.data.name.capitalize();
         UserStore.userInfo(response.data);
       });
@@ -601,8 +601,6 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
 }]);
 
 app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$location', 'UserStore', '$cookies', function ($scope, $http, $routeParams, $location, UserStore, $cookies) {
-  //have two sections. one for admin stuff and other for general user stuff. If they are an
-  //admin of a guild, they can manipulate that guild otherwise they wont see admin section
   var userIdent = $cookies.get('user');
   var getUserInfo = function () {
     if (userIdent != undefined) {
@@ -611,11 +609,17 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
         $scope.showUserInfo = true;
         $scope.showLogin = false;
         $scope.userName = response.data.name.capitalize();
+        $scope.userId = response.data.ident;
+        console.log(response.data);
+        $scope.userAvatar = response.data.avatar;
         UserStore.userInfo(response.data);
       }, function errorCallback(response) {
         if(response.statusText)
           $location.path('/');
       });
+    }
+    else {
+      $location.path('/');
     }
     if ($scope.userName === undefined) {
       $scope.showUserInfo = false;
@@ -623,4 +627,41 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
     }
   }
   getUserInfo();
+
+  $scope.dynamicUserClass = 'selected-tab';
+  $scope.showUserSection = true;
+  $scope.showGuildSection = false;
+  $scope.selectUserTab = function () {
+    $scope.dynamicGuildClass = '';
+    $scope.dynamicUserClass = 'selected-tab';
+    $scope.showUserSection = true;
+    $scope.showGuildSection = false;
+  }
+  $scope.selectGuildTab = function () {
+    $scope.dynamicUserClass = '';
+    $scope.dynamicGuildClass = 'selected-tab';
+    $scope.showUserSection = false;
+    $scope.showGuildSection = true;
+  }
+  $scope.showEdit = true;
+  $scope.editAvatar = function () {
+    $scope.showEdit = false;
+    $scope.showSave = true;
+    $scope.showCancel = true;
+  }
+  $scope.cancelAvatar = function () {
+    $scope.showEdit = true;
+    $scope.showSave = false;
+    $scope.showCancel = false;
+  }
+  $scope.saveAvatar = function () {
+    console.log($scope.newAvatarUrl);
+    // $scope.userAvatar = response.data.avatar;
+    $scope.userAvatar = $scope.newAvatarUrl;
+    $http.post('api/change-avatar', {newUrl: $scope.userAvatar, userId: $scope.userId})
+    .then(function (response) {
+
+    });
+  }
+
 }]);
