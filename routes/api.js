@@ -170,7 +170,7 @@ router.post('/user-check', function (req, res) {
 });
 
 router.post('/user-login', function (req, res) {
-  var userName = req.body.userN;
+  var userName = req.body.userN.toLowerCase();
   var userPassword = req.body.userP;
   users.findOne({ username: userName })
   .then(function (user) {

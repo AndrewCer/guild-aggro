@@ -208,7 +208,6 @@ app.controller('LoginController', ['$scope', '$http', '$location', '$cookies', '
   $scope.userLogin = function () {
     $http.post('api/user-login', { userN: $scope.userHandle, userP: $scope.password })
     .then(function (response) {
-      console.log(response);
       if (response.data.error) {
         $scope.loginError = true;
       }
@@ -614,10 +613,20 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
         $scope.userAvatar = response.data.avatar;
         UserStore.userInfo(response.data);
         $http.post('api/get-guildinfo', { gId: $scope.guildId })
-        .then(function (response) {
-          $scope.guildInfo = response.data
-          $scope.guildDomain = response.data.domain;
-          $scope.guildName = response.data.name.capitalize();
+        .then(function (guild) {
+          if (guild.data.guildMaster[0].ident === $scope.userId) {
+            $scope.guildMaster = true;
+            $scope.guildRanking = 'Guild Master';
+          }
+          else {
+            $scope.guildRanking = 'Member'
+            $scope.guildMaster = false;
+            $scope.guildAdmin = false;
+            $scope.guildMember = true;
+          }
+          $scope.guildInfo = guild.data
+          $scope.guildDomain = guild.data.domain;
+          $scope.guildName = guild.data.name.capitalize();
         })
       }, function errorCallback(response) {
         if(response.statusText)
@@ -649,6 +658,15 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
     $scope.showGuildSection = true;
   }
   $scope.showEdit = true;
+  $scope.showGuildEdit = true;
+  $scope.showEditName = function () {
+    $scope.showGuildEdit = false;
+    $scope.showNameSave = true;
+  }
+  $scope.cancelName = function () {
+    $scope.showGuildEdit = true;
+    $scope.showNameSave = false;
+  }
   $scope.editAvatar = function () {
     $scope.showEdit = false;
     $scope.showSave = true;
@@ -664,7 +682,9 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
     $scope.userAvatar = $scope.newAvatarUrl;
     $http.post('api/change-avatar', {newUrl: $scope.userAvatar, userId: $scope.userId})
     .then(function (response) {
-      //handle response
+      $scope.showEdit = true;
+      $scope.showSave = false;
+      $scope.showCancel = false;
     });
   }
   $scope.getGuild = function (gDomain) {
