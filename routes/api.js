@@ -92,7 +92,11 @@ router.post('/guild-check', function (req, res) {
   var guildTempalte = req.body.gTemplate;
   var guildBackground = req.body.gBackground;
   var guildMaster = req.body.gMaster;
-  guilds.insert({ domain: guildDomain, name: guildName, template: guildTempalte, backgroundIm: guildBackground, guildMaster: guildMaster, guildAdmin:[], guildMember:[], posts: [], memberRequests: [], privacyStatus: 'public'})
+  var title = 'Welcome to Guild Aggro';
+  var body = 'This is your first guild post! Head to "Posts" on the navbar to create more.';
+  var postedBy = [{ident: "1234", name: 'Mr. T', avatar:'http://vignette3.wikia.nocookie.net/wowwiki/images/6/68/WoW_Lich_King_Arthas.png/revision/latest?cb=20100221131133'}];
+  var postedDate = new Date();
+  guilds.insert({ domain: guildDomain, name: guildName, template: guildTempalte, backgroundIm: guildBackground, guildMaster: guildMaster, guildAdmin:[], guildMember:[], posts: [{title: title, body: body, postedBy: postedBy, date: postedDate}], memberRequests: [], privacyStatus: 'public'})
   .then(function (guild) {
     res.json(guild)
   })

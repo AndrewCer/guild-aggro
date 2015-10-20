@@ -4,7 +4,11 @@ String.prototype.capitalize = function(){
     });
 };
 
-app.controller('MasterController', ['$scope', '$location', '$anchorScroll', '$window', function ($scope, $location, $anchorScroll, $window) {
+app.controller('MasterController', ['$scope', '$location', '$anchorScroll', '$window', '$cookies', function ($scope, $location, $anchorScroll, $window, $cookies) {
+  $scope.logOut = function () {
+    $cookies.remove("user");
+    $location.path('/');
+  }
   $scope.closeModal = function () {
     $location.path('/');
     $location.hash('portfolio');
@@ -183,7 +187,6 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
           $scope.handleError = response.data.handleErrors
           $scope.passwordError = response.data.passwordErrors
           $scope.emailError = response.data.emailArray
-          console.log(response.data);
         }
         else {
           //add cookie to browser
@@ -191,7 +194,8 @@ app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http
           UserStore.userInfo(response.data);
           // TODO: figure out how to access this factory
           //redirect and access user info from another controller/partial
-          $location.path('/temp-guild-creation')
+          // $location.path('/temp-guild-creation')
+          $location.path('/create-or-apply')
         }
       })
     }
@@ -213,11 +217,20 @@ app.controller('LoginController', ['$scope', '$http', '$location', '$cookies', '
         $scope.loginError = false;
         $cookies.put('user', response.data.ident);
         UserStore.userInfo(response.data);
-        $location.path('/guild/method');
+        $location.path('/account/' + response.data.ident);
       }
     });
   }
 }])
+
+app.controller('CreateApplyController', ['$scope', '$location', '$cookies', function ($scope, $location, $cookies) {
+  $scope.getCreateGuild = function () {
+    $location.path('/temp-guild-creation');
+  }
+  $scope.getAccountPage = function () {
+    $location.path('/account/' + $cookies.get('user'));
+  }
+}]);
 
 app.controller('GuildCreationController', ['$scope', '$window', '$location', '$http', '$timeout', 'UserStore', function ($scope, $window, $location, $http, $timeout, UserStore) {
   // TODO: redirect if there is no user info
@@ -508,6 +521,7 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
       $scope.guildName = response.data.name.capitalize();
       $scope.guildMaster = response.data.guildMaster[0].name.capitalize();
       $scope.posts = response.data.posts;
+      $scope.dateValue = new Date();
 
       //nav divs
       $scope.postContent = function () {
@@ -589,4 +603,24 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
 app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$location', 'UserStore', '$cookies', function ($scope, $http, $routeParams, $location, UserStore, $cookies) {
   //have two sections. one for admin stuff and other for general user stuff. If they are an
   //admin of a guild, they can manipulate that guild otherwise they wont see admin section
+  var userIdent = $cookies.get('user');
+  var getUserInfo = function () {
+    if (userIdent != undefined) {
+      $http.post('api/user-check', { userIdent: $routeParams.id})
+      .then(function (response) {
+        $scope.showUserInfo = true;
+        $scope.showLogin = false;
+        $scope.userName = response.data.name.capitalize();
+        UserStore.userInfo(response.data);
+      }, function errorCallback(response) {
+        if(response.statusText)
+          $location.path('/');
+      });
+    }
+    if ($scope.userName === undefined) {
+      $scope.showUserInfo = false;
+      $scope.showLogin = true;
+    }
+  }
+  getUserInfo();
 }]);

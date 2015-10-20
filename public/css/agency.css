@@ -4,6 +4,10 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+/*html {
+  background-color: black;
+}*/
+
 body {
     overflow-x: hidden;
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -1217,6 +1221,14 @@ body {
 .picked {
   border-bottom: 5px solid red;
   width: 300px;
+}
+
+.create-guild {
+  margin: 20px;
+}
+
+.apply-guild {
+  margin: 20px;
 }
 
 /* box shadow version */

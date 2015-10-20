@@ -14,7 +14,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       templateUrl: 'partials/login.html',
       controller: 'LoginController'
     })
-    .when('/account', {
+    .when('/account/:id', {
       templateUrl: 'partials/user-account.html',
       controller: 'UserAccountController'
     })
@@ -25,6 +25,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     .when('/blue-template', {
       templateUrl: 'partials/blue-temp.html',
       controller: 'BlueController'
+    })
+    .when('/create-or-apply', {
+      templateUrl: 'partials/create-apply.html',
+      controller: 'CreateApplyController'
     })
     .when('/guild/:gDomain', {
       templateUrl: 'partials/guild-page.html',
