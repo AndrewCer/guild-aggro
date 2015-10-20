@@ -55,18 +55,14 @@
       </div>
         <div class="container">
             <div class="row">
-                  <!-- if in guild and not guild master-->
                 <div class="col-lg-11">
-                    <h4>Your Guild:</h4>
-                    <p>Name</p>
-                    <p>URL:</p>
+                    <h4>Your Guild</h4>
+                    <p>Live Site: <a href='#' ng-click='getGuild(guildDomain)'>{{guildName}}</a></p>
+                    <p>Ranking: Member/master/admin{{guildRank}}</p>
                 </div>
                   <!-- if in guild and guild master-->
                 <div class="col-lg-11">
-                    <h4>Your Guild:</h4>
-                    <p>Name</p>
-                    <p>URL:</p>
-                    <h2>Edit Guild Page Section</h2>
+                    <h2>Edit Guild Page Section (if guild master)</h2>
                     <p>Change Name</p>
                     <p>Change background image</p>
                     <p>Manage members</p>

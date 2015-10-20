@@ -106,7 +106,6 @@ router.post('/guild-check', function (req, res) {
 });
 
 router.post('/get-guild', function (req, res) {
-  // console.log(req.body.gDomain);
   guilds.findOne({ domain: req.body.gDomain })
   .then(function (guild) {
     if (guild === undefined) {
@@ -118,6 +117,18 @@ router.post('/get-guild', function (req, res) {
       res.json(guild)
     }
   })
+});
+
+router.post('/get-guildinfo', function (req, res) {
+  guilds.findOne({ _id: req.body.gId})
+  .then(function (guild) {
+    if (guild === undefined) {
+      res.json(false);
+    }
+    else {
+      res.json(guild);
+    }
+  });
 });
 
 router.post('/domain-check', function (req, res) {
@@ -188,7 +199,7 @@ router.post('/change-avatar', function (req, res) {
   console.log(newUrl, userId);
   users.update({ _id: userId }, { $set: {avatar: newUrl}})
   .then(function (response) {
-
+    res.json(true);
   })
 })
 

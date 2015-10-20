@@ -609,10 +609,16 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
         $scope.showUserInfo = true;
         $scope.showLogin = false;
         $scope.userName = response.data.name.capitalize();
+        $scope.guildId = response.data.guild;
         $scope.userId = response.data.ident;
-        console.log(response.data);
         $scope.userAvatar = response.data.avatar;
         UserStore.userInfo(response.data);
+        $http.post('api/get-guildinfo', { gId: $scope.guildId })
+        .then(function (response) {
+          $scope.guildInfo = response.data
+          $scope.guildDomain = response.data.domain;
+          $scope.guildName = response.data.name.capitalize();
+        })
       }, function errorCallback(response) {
         if(response.statusText)
           $location.path('/');
@@ -627,7 +633,6 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
     }
   }
   getUserInfo();
-
   $scope.dynamicUserClass = 'selected-tab';
   $scope.showUserSection = true;
   $scope.showGuildSection = false;
@@ -655,13 +660,15 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
     $scope.showCancel = false;
   }
   $scope.saveAvatar = function () {
-    console.log($scope.newAvatarUrl);
     // $scope.userAvatar = response.data.avatar;
     $scope.userAvatar = $scope.newAvatarUrl;
     $http.post('api/change-avatar', {newUrl: $scope.userAvatar, userId: $scope.userId})
     .then(function (response) {
-
+      //handle response
     });
+  }
+  $scope.getGuild = function (gDomain) {
+    $location.path('/guild/' + gDomain);
   }
 
 }]);
