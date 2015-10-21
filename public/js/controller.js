@@ -432,6 +432,14 @@ app.controller('BlueController', ['$scope', '$http', '$interval', '$route', func
       avatar: 'http://www.forumsx.net/images/avatars/lotc_book_thrall.jpg'
     },
     {
+      title: 'Ummmm?',
+      message: "Guys.....What's a guild?",
+      poster: 'Shelby',
+      comments: ['yea','sweet'],
+      date: new Date(),
+      avatar: 'https://pbs.twimg.com/profile_images/648200237681475585/57ouKkRp.jpg'
+    },
+    {
       title: 'We won',
       message: 'PBR&B stumptown trust fund put a bird on it Intelligentsia lumbersexual. Master cleanse vinyl disrupt, lomo Pinterest kogi cornhole hella. Literally wayfarers vinyl mixtape. Blog Blue Bottle lumbersexual, wayfarers beard cray gentrify lo-fi kitsch trust fund health goth quinoa roof party brunch aesthetic. Fap organic Vice, Thundercats cliche street art readymade jean shorts fixie four loko selvage tofu. XOXO kitsch Intelligentsia hoodie. Locavore Portland literally authentic, Bushwick wolf four dollar toast.',
       poster: 'John',
