@@ -24,6 +24,10 @@ app.controller('SplashController', ['$scope', '$timeout', '$location', '$cookies
     // $window.location = 'account/' + $cookies.get('user');
     $location.path('/account/' + $cookies.get('user'));
   }
+  $scope.goToTemplate = function () {
+    // $location.path('/blue-template');
+    $window.location = '/blue-template';
+  }
 }])
 
 app.controller('InitSignUpController', ['$scope', '$window', '$location', '$http', 'UserStore', 'dbCheck', '$cookies', function ($scope, $window, $location, $http, UserStore, dbCheck, $cookies) {
@@ -755,6 +759,9 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
   }
   $scope.hideCancelButton = true;
   $scope.showAppliedMembers = function (info) {
+    if (info.memberRequests.length === 0) {
+      $scope.showNoMembers = true;
+    }
     $scope.appliedMemebers = info.memberRequests;
     $scope.hideCancelButton = false;
     $scope.showGuildEdit = false;
@@ -767,6 +774,8 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
     $http.post('api/guild-add-member', {guildId: $scope.guildInfo._id, userId: userId, userName: userName})
     .then(function (response) {
       console.log(response);
+      $scope.showGuildEdit = true;
+      $scope.hideCancelButton = true;
     })
   }
 }]);

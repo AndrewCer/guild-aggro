@@ -111,6 +111,9 @@
                       </div>
                       <button ng-click='showAppliedMembers(guildInfo)' ng-show='showGuildEdit' type="button" class="btn btn-xl edit-button">Check Applied Memebers</button>
                       <div ng-hide='showGuildEdit'>
+                        <div ng-show='showNoMembers'>
+                          <h4 class="color-red">No new applicants</h4>
+                        </div>
                         <div ng-repeat='applicant in appliedMemebers' class="all-guilds-block col-md-7">
                           <p>Applicant: {{applicant.userName | capitalize}}</p>
                           <button ng-click='acceptApplicant(applicant.userId, applicant.userName)' type="button" class="btn btn-xl edit-button" style="margin-left:0; margin-bottom: 10px;">Accept</button>
