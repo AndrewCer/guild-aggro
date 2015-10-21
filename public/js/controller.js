@@ -387,7 +387,7 @@ app.controller('BlueController', ['$scope', '$http', '$interval', '$route', func
       avatar: 'http://vignette3.wikia.nocookie.net/wowwiki/images/6/68/WoW_Lich_King_Arthas.png/revision/latest?cb=20100221131133',
       date: new Date(),
       message: $scope.pMessage,
-      poster: 'Andrew',
+      poster: 'Mr. T',
       comments: []
     })
     $scope.pTitle = null;
@@ -424,7 +424,7 @@ app.controller('BlueController', ['$scope', '$http', '$interval', '$route', func
       message: 'PBR&B stumptown trust fund put a bird on it Intelligentsia lumbersexual. Master cleanse vinyl disrupt, lomo Pinterest kogi cornhole hella. Literally wayfarers vinyl mixtape. Blog Blue Bottle lumbersexual, wayfarers beard cray gentrify lo-fi kitsch trust fund health goth quinoa roof party brunch aesthetic. Fap organic Vice, Thundercats cliche street art readymade jean shorts fixie four loko selvage tofu. XOXO kitsch Intelligentsia hoodie. Locavore Portland literally authentic, Bushwick wolf four dollar toast.',
       poster: 'Andrew',
       comments: ['yea','sweet'],
-      // TODO: find out how to insert an image into database to store users image
+      date: new Date(),
       avatar: 'http://www.forumsx.net/images/avatars/lotc_book_thrall.jpg'
     },
     {
@@ -432,6 +432,7 @@ app.controller('BlueController', ['$scope', '$http', '$interval', '$route', func
       message: 'PBR&B stumptown trust fund put a bird on it Intelligentsia lumbersexual. Master cleanse vinyl disrupt, lomo Pinterest kogi cornhole hella. Literally wayfarers vinyl mixtape. Blog Blue Bottle lumbersexual, wayfarers beard cray gentrify lo-fi kitsch trust fund health goth quinoa roof party brunch aesthetic. Fap organic Vice, Thundercats cliche street art readymade jean shorts fixie four loko selvage tofu. XOXO kitsch Intelligentsia hoodie. Locavore Portland literally authentic, Bushwick wolf four dollar toast.',
       poster: 'John',
       comments: ['yea','sweet'],
+      date: new Date(),
       avatar: "http://media-hearth.cursecdn.com/avatars/207/702/635655008955091849.png"
     },
     {
@@ -439,6 +440,7 @@ app.controller('BlueController', ['$scope', '$http', '$interval', '$route', func
       message: 'PBR&B stumptown trust fund put a bird on it Intelligentsia lumbersexual. Master cleanse vinyl disrupt, lomo Pinterest kogi cornhole hella. Literally wayfarers vinyl mixtape. Blog Blue Bottle lumbersexual, wayfarers beard cray gentrify lo-fi kitsch trust fund health goth quinoa roof party brunch aesthetic. Fap organic Vice, Thundercats cliche street art readymade jean shorts fixie four loko selvage tofu. XOXO kitsch Intelligentsia hoodie. Locavore Portland literally authentic, Bushwick wolf four dollar toast.',
       poster: 'Steve',
       comments: ['yea','sweet'],
+      date: new Date(),
       avatar: "http://33.media.tumblr.com/avatar_90e03d96d8dc_128.png"
     }
   ];
