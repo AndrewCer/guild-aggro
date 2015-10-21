@@ -54,9 +54,9 @@
             </div>
             <div class="block-content">
               <p><u>Master:</u> <b>{{guildMaster}}</b></p>
-              <p><u>Roster:</u> </p>
-              <div ng-repeat='member in guildMembers'>
-                <p><b>{{member.name | capitalize}}</b></p>
+              <p style="display: inline-block;"><u>Roster: </u> </p>
+              <div style="display: inline-block;" ng-repeat='member in guildMembers'>
+                <p><b>{{member.name | capitalize}}</b>,</p>
               </div>
             </div>
             <div class="block-footer">
