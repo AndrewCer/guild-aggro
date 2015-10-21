@@ -196,11 +196,29 @@ router.post('/user-login', function (req, res) {
 router.post('/change-avatar', function (req, res) {
   var newUrl = req.body.newUrl;
   var userId = req.body.userId;
-  console.log(newUrl, userId);
   users.update({ _id: userId }, { $set: {avatar: newUrl}})
   .then(function (response) {
     res.json(true);
-  })
-})
+  });
+});
+
+router.post('/change-guild-name', function (req, res) {
+  var newName = req.body.newName;
+  var guildId = req.body.guildId;
+  guilds.update({ _id: guildId }, { $set: {name: newName}})
+  .then(function (response) {
+    res.json(true);
+  });
+});
+
+router.post('/change-guild-banner', function (req, res) {
+  var newBanner = req.body.newBanner;
+  var guildId = req.body.guildId;
+  console.log(newBanner, guildId);
+  guilds.update({ _id: guildId }, { $set: {backgroundIm: newBanner}})
+  .then(function (response) {
+    res.json(true);
+  });
+});
 
 module.exports = router;

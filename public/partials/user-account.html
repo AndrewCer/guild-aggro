@@ -64,7 +64,7 @@
                 <div class="col-lg-11" ng-show='guildMaster'>
                     <h2>Edit Guild</h2>
                     <button ng-click='showEditName()' ng-show='showGuildEdit' type="button" class="btn btn-xl edit-button">Name</button>
-                    <button ng-click='showEditBackground()' ng-show='showGuildEdit' type="button" class="btn btn-xl edit-button">Background Image</button>
+                    <button ng-click='showEditBackground()' ng-show='showGuildEdit' type="button" class="btn btn-xl edit-button">Banner Image</button>
                     <div class="guild-name" ng-show='showNameSave'>
                       <div>
                         <p style="display: inline-block;">Current Name: </p>
@@ -73,10 +73,23 @@
                       <div class="col-lg-5" style="padding-left:0;">
                         <button ng-click='saveName()' type="button" class="btn btn-xl edit-button" style="margin-left:0;">Save</button>
                         <button ng-click='cancelName()' type="button" class="btn btn-xl edit-button">Cancel</button>
-                        <input style="margin-top: 20px;" ng-model='newGuildName' class="form-control" type="text" placeholder="New Guild Name">
+                        <p class="color-red">{{newGuildNameError}}</p>
+                        <input style="margin-top: 20px;" ng-model='newGuildName' class="form-control" type="text" placeholder="New Guild Name (NOTE: URL will NOT change)">
                       </div>
                     </div>
-                    <div ng-hide='showNameSave'>
+                    <div class="guild-banner" ng-show='showBannerSave'>
+                      <div id="display-banner">
+                        <p>Current Banner: </p>
+                        <img style="width: 500px; height: 300px;" src="{{bannerImage}}" alt="banner"/>
+                      </div>
+                      <div class="col-lg-5" style="padding-left:0;">
+                        <button ng-click='saveBanner()' ng-hide='hideSaveCancel' type="button" class="btn btn-xl edit-button" style="margin-left:0;">Save</button>
+                        <button ng-click='cancelBanner()' ng-hide='hideSaveCancel' type="button" class="btn btn-xl edit-button">Cancel</button>
+                        <button ng-click='cancelBanner()' ng-show='showDoneButton' type="button" class="btn btn-xl edit-button">Done</button>
+                        <input style="margin-top: 20px;" ng-model='newGuildBanner' class="form-control" type="text" placeholder="New Banner URL">
+                      </div>
+                    </div>
+                    <div ng-hide='showNameSave || showBannerSave'>
                       <h2>Manage Mebers</h2>
                       <!-- <button ng-click='manageMembers()' ng-show='showEdit' type="button" class="btn btn-xl edit-button">Current Memebers</button> -->
                       <button ng-click='showAppliedMembers()' ng-show='showGuildEdit' type="button" class="btn btn-xl edit-button">Applied Memebers</button>

@@ -614,6 +614,12 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
         UserStore.userInfo(response.data);
         $http.post('api/get-guildinfo', { gId: $scope.guildId })
         .then(function (guild) {
+          if (guild.data.backgroundIm === null) {
+            $scope.bannerImage = "http://www.damnwallpapers.com/wp-content/uploads/2013/07/lich-king-arthas-1080x1920.jpg";
+          }
+          else {
+            $scope.bannerImage = guild.data.backgroundIm;
+          }
           if (guild.data.guildMaster[0].ident === $scope.userId) {
             $scope.guildMaster = true;
             $scope.guildRanking = 'Guild Master';
@@ -667,6 +673,42 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
     $scope.showGuildEdit = true;
     $scope.showNameSave = false;
   }
+  $scope.saveName = function () {
+    if ($scope.newGuildName.length > 2) {
+      $scope.newGuildNameError = null;
+      $scope.guildName = $scope.newGuildName;
+      $http.post('api/change-guild-name', {newName: $scope.newGuildName, guildId: $scope.guildId})
+      .then(function (response) {
+        $scope.showGuildEdit = true;
+        $scope.showNameSave = false;
+        $scope.newGuildName = null;
+      });
+    }
+    else {
+      $scope.newGuildNameError = 'Guild name must be longer than 2 characters'
+    }
+  }
+  $scope.showEditBackground = function () {
+    $scope.showBannerSave = true;
+    $scope.showGuildEdit = false;
+    $scope.showNameSave = false;
+    $scope.hideSaveCancel = false;
+    $scope.showDoneButton = false;
+  }
+  $scope.cancelBanner = function () {
+    $scope.showGuildEdit = true;
+    $scope.showNameSave = false;
+    $scope.showBannerSave = false;
+  }
+  $scope.saveBanner = function () {
+    $scope.bannerImage = $scope.newGuildBanner;
+    $http.post('api/change-guild-banner', {newBanner: $scope.newGuildBanner, guildId: $scope.guildId})
+    .then(function (response) {
+      $scope.hideSaveCancel = true;
+      $scope.showDoneButton = true;
+      $scope.newGuildBanner = null;
+    });
+  }
   $scope.editAvatar = function () {
     $scope.showEdit = false;
     $scope.showSave = true;
@@ -678,7 +720,6 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
     $scope.showCancel = false;
   }
   $scope.saveAvatar = function () {
-    // $scope.userAvatar = response.data.avatar;
     $scope.userAvatar = $scope.newAvatarUrl;
     $http.post('api/change-avatar', {newUrl: $scope.userAvatar, userId: $scope.userId})
     .then(function (response) {
