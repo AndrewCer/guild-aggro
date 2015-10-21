@@ -53,10 +53,10 @@
               </div>
             </div>
             <div class="block-content">
-              <p>Master: <b>{{guildMaster}}</b></p>
-              <p>Roster: </p>
-              <div ng-repeat='member in guildInfo.guildMember'>
-
+              <p><u>Master:</u> <b>{{guildMaster}}</b></p>
+              <p><u>Roster:</u> </p>
+              <div ng-repeat='member in guildMembers'>
+                <p><b>{{member.name | capitalize}}</b></p>
               </div>
             </div>
             <div class="block-footer">
@@ -76,9 +76,9 @@
               <!-- TODO: ng-repeat for the first 5 posts in db -->
               <img class="poster-avatar mini-avatar" ng-src="{{post.postedBy[0].avatar}}" alt="avatar"/>
               <h1 class="post-title">{{post.title}}</h1>
-              <p class="text-muted post-info">By <a href='#'>{{post.postedBy[0].name}}</a> on {{post.date | date:'MMMM dd, yyyy'}}</p>
+              <p class="text-muted post-info">By <a href='#'>{{post.postedBy[0].name | capitalize}}</a> on {{post.date | date:'MMMM dd, yyyy'}}</p>
               <p class="post-message">{{post.body}}</p>
-              <a class="col-md-offset-11 edit-post" ng-click='editPost'>Edit</a>
+              <!-- <a class="col-md-offset-11 edit-post" ng-click='editPost'>Edit</a> -->
               <!-- TODO: add seperator in here -->
               <!-- ng-repeat here for "blog post" type content -->
             </div>

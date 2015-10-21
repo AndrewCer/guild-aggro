@@ -55,10 +55,25 @@
       </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-11">
+                <div class="col-lg-11" ng-hide='noGuild'>
                     <h4>Your Guild</h4>
                     <p>Live Site: <a href='#' ng-click='getGuild(guildDomain)'>{{guildName}}</a></p>
                     <p>Ranking: <span class="color-red">{{guildRanking}}<span></p>
+                </div>
+                <div class="col-lg-11" ng-show='noGuild'>
+                  <div ng-hide='guildSearching'>
+                    <h4 class="color-red">You're not in a guild!</h4>
+                    <button ng-click='routeToCreateGuild()' type="button" class="btn btn-xl edit-button" style="margin-left:0;">Create Guild</button>
+                    <button ng-click='showSearchGuild()' type="button" class="btn btn-xl edit-button">Join Guild</button>
+                  </div>
+                  <div ng-show='guildSearching'>
+                    <div ng-repeat='guild in allGuilds' class="all-guilds-block col-md-7">
+                      <p>Name: <a href='/guild/{{guild.domain}}'>{{guild.name}}</a></p>
+                      <p>Members: {{guild.guildMaster.length + guild.guildAdmin.length + guild.guildMember.length}}</p>
+                      <p>Guild Master: {{guild.guildMaster[0].name}}</p>
+                      <button ng-click='applyToGuild(guild._id)' type="button" class="btn btn-xl edit-button" style="margin-left:0; margin-bottom: 10px;">Apply</button>
+                    </div>
+                  </div>
                 </div>
                   <!-- if in guild and guild master-->
                 <div class="col-lg-11" ng-show='guildMaster'>
@@ -90,10 +105,17 @@
                       </div>
                     </div>
                     <div ng-hide='showNameSave || showBannerSave'>
-                      <h2>Manage Mebers</h2>
-                      <!-- <button ng-click='manageMembers()' ng-show='showEdit' type="button" class="btn btn-xl edit-button">Current Memebers</button> -->
-                      <button ng-click='showAppliedMembers()' ng-show='showGuildEdit' type="button" class="btn btn-xl edit-button">Applied Memebers</button>
-
+                      <div>
+                        <h2 style="display: inline-block;">Manage Members</h2>
+                        <button ng-hide='hideCancelButton' ng-click='cancelMember()' type="button" class="btn btn-xl edit-button" style="margin-bottom: 10px;">Cancel</button>
+                      </div>
+                      <button ng-click='showAppliedMembers(guildInfo)' ng-show='showGuildEdit' type="button" class="btn btn-xl edit-button">Check Applied Memebers</button>
+                      <div ng-hide='showGuildEdit'>
+                        <div ng-repeat='applicant in appliedMemebers' class="all-guilds-block col-md-7">
+                          <p>Applicant: {{applicant.userName | capitalize}}</p>
+                          <button ng-click='acceptApplicant(applicant.userId, applicant.userName)' type="button" class="btn btn-xl edit-button" style="margin-left:0; margin-bottom: 10px;">Accept</button>
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>

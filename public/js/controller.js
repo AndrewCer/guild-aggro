@@ -519,6 +519,7 @@ app.controller('GuildController', ['$scope', '$http', '$routeParams', '$location
       $scope.guildInfo = response.data;
       $scope.guildName = response.data.name.capitalize();
       $scope.guildMaster = response.data.guildMaster[0].name.capitalize();
+      $scope.guildMembers = response.data.guildMember;
       $scope.posts = response.data.posts;
       $scope.dateValue = new Date();
 
@@ -614,6 +615,9 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
         UserStore.userInfo(response.data);
         $http.post('api/get-guildinfo', { gId: $scope.guildId })
         .then(function (guild) {
+          if (guild.data === null) {
+            return $scope.noGuild = true;
+          }
           if (guild.data.backgroundIm === null) {
             $scope.bannerImage = "http://www.damnwallpapers.com/wp-content/uploads/2013/07/lich-king-arthas-1080x1920.jpg";
           }
@@ -731,5 +735,43 @@ app.controller('UserAccountController', ['$scope', '$http', '$routeParams', '$lo
   $scope.getGuild = function (gDomain) {
     $location.path('/guild/' + gDomain);
   }
-
+  $scope.routeToCreateGuild = function () {
+    $location.path('/temp-guild-creation');
+  }
+  $scope.showSearchGuild = function () {
+    $scope.guildSearching = true;
+    $http.get('api/all-guilds')
+    .then(function (response) {
+      $scope.allGuilds = response.data;
+    })
+  }
+  $scope.applyToGuild = function (gId) {
+    $http.post('api/guild-apply', {guildId: gId, userId: $scope.userId, userName: $scope.userName.toLowerCase()})
+    .then(function (response) {
+      $scope.guildSearching = false;
+    });
+  }
+  $scope.hideCancelButton = true;
+  $scope.showAppliedMembers = function (info) {
+    $scope.appliedMemebers = info.memberRequests;
+    $scope.hideCancelButton = false;
+    $scope.showGuildEdit = false;
+  }
+  $scope.cancelMember = function () {
+    $scope.showGuildEdit = true;
+    $scope.hideCancelButton = true;
+  }
+  $scope.acceptApplicant = function (userId, userName) {
+    $http.post('api/guild-add-member', {guildId: $scope.guildInfo._id, userId: userId, userName: userName})
+    .then(function (response) {
+      console.log(response);
+    })
+  }
 }]);
+
+app.filter('capitalize', function() {
+  return function(input, all) {
+    var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
+    return (!!input) ? input.replace(reg, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+  }
+});

@@ -221,4 +221,38 @@ router.post('/change-guild-banner', function (req, res) {
   });
 });
 
+router.get('/all-guilds', function (req, res) {
+  guilds.find({})
+  .then(function (guilds) {
+    res.json(guilds)
+  });
+});
+
+router.post('/guild-apply', function (req, res) {
+  var guildId = req.body.guildId;
+  var userId = req.body.userId;
+  var userName = req.body.userName;
+  guilds.update({ _id: guildId }, { $push: {memberRequests: {$each:[{userName: userName, userId: userId}]}}})
+  .then(function (response) {
+    res.json(true);
+  });
+});
+
+router.post('/guild-add-member', function (req, res) {
+  var guildId = req.body.guildId;
+  var userId = req.body.userId;
+  var userName = req.body.userName;
+  console.log(guildId, userId, userName);
+  guilds.update({ _id: guildId }, { $push: {guildMember: {$each:[{ident: userId, name: userName}], $position: 0}}})
+  .then(function () {
+    guilds.update({ _id: guildId }, { $pull: { memberRequests: {userId: userId}}})
+      .then(function () {
+        users.update({ _id: userId }, { $push: {guild: guildId}})
+        .then(function () {
+          res.json(true)
+        });
+      });
+    });
+});
+
 module.exports = router;
